@@ -21,7 +21,8 @@ clearTerminal()
 
 # Get and confirm filename
 while True:
-    filename = input("What do you want to name the file?\n")
+    filename = input("What do you want to name the file?\nExtensions will be stripped.\n\n")
+    filename = filename.split(".")[0]
     clearTerminal()
     print(f"Are you sure that '{filename}.png' is the filename you want?")
     choice = input("(y/n): ")
