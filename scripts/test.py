@@ -11,6 +11,14 @@ while True:
         break
 
 
-filename = input("What do you want to name the file?\n")
+# Get and confirm data
+while True:
+    filename = input("What do you want to name the file?\n")
+    print()
+    print(f"Are you sure that '{filename}.png' is the filename you want?")
+    choice = input("(y/n): ")
+    if choice.lower()[0] == "y":
+        break
+
 img = qrcode.make(data)
 img.save(f"output/{filename}.png")
