@@ -9,6 +9,7 @@ def clearTerminal():
 
 # Get and confirm data
 while True:
+    clearTerminal()
     data = input("What data do you want put in your QR Code?\n")
     clearTerminal()
     print(f"Are you sure that '{data}' is the what should be in the QR Code?")
@@ -16,11 +17,10 @@ while True:
     if choice.lower()[0] == "y":
         break
 
-# Clear terminal after confirming data
-clearTerminal()
 
 # Get and confirm filename
 while True:
+    clearTerminal()
     filename = input("What do you want to name the file?\nExtensions will be stripped.\n\n")
     filename = filename.split(".")[0]
     clearTerminal()
@@ -29,8 +29,6 @@ while True:
     if choice.lower()[0] == "y":
         break
 
-# Clear terminal after confirming filename
-clearTerminal()
 
 # Error correction mapping
 correction_mapping = {
@@ -40,8 +38,19 @@ correction_mapping = {
     '4': ["H", qrcode.constants.ERROR_CORRECT_H],
 }
 
+# Set indicator variable to check if input is valid
+invalid = False
+
 # Get and confirm error correction level
 while True:
+    clearTerminal()
+
+    # Handle last input invalid
+    if invalid:
+        print("Invalid selection. Please try again.\n")
+        invalid = False
+
+    # Ask user for input
     print("What level of error correction do you want?")
     print("\t1. Level L - 7% of data can be restored")
     print("\t2. Level M - 15% of data can be restored")
@@ -59,7 +68,7 @@ while True:
             break
 
     except KeyError:
-        print("Invalid selection. Please try again.\n")
+        invalid = True
 
 # Make and save qr code
 img = qrcode.make(data, error_correction=correction_mapping[correction_level][1])
