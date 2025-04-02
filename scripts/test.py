@@ -22,21 +22,8 @@ def get_filename():
     return filename
 
 
-# Main Loop for handling text data
-def text_data():
-    # Get and confirm data
-    while True:
-        clearTerminal()
-        data = input("What data do you want put in your QR Code?\n")
-        clearTerminal()
-        print(f"Are you sure that '{data}' is the what should be in the QR Code?")
-        choice = input("(y/n): ")
-        if choice.lower()[0] == "y":
-            break
-
-    # Get filename
-    filename = get_filename()
-
+# Define a function to get  the error correction level
+def get_correction_level():
     # Error correction mapping
     correction_mapping = {
         '1': ["L", qrcode.constants.ERROR_CORRECT_L],
@@ -76,9 +63,30 @@ def text_data():
 
         except KeyError:
             invalid = True
+        
+    return correction_mapping[correction_level][1]
+
+
+# Main Loop for handling text data
+def text_data():
+    # Get and confirm data
+    while True:
+        clearTerminal()
+        data = input("What data do you want put in your QR Code?\n")
+        clearTerminal()
+        print(f"Are you sure that '{data}' is the what should be in the QR Code?")
+        choice = input("(y/n): ")
+        if choice.lower()[0] == "y":
+            break
+
+    # Get filename
+    filename = get_filename()
+
+    # Get error correction level
+    correction_level = get_correction_level()
 
     # Make and save qr code
-    img = qrcode.make(data, error_correction=correction_mapping[correction_level][1])
+    img = qrcode.make(data, error_correction=correction_level)
     img.save(f"output/{filename}.png")
 
 
