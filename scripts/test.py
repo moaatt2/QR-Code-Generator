@@ -82,4 +82,48 @@ def text_data():
     img.save(f"output/{filename}.png")
 
 
-text_data()
+# Main Loop for handling vCard data
+def vcard():
+    print('TODO')
+
+
+# List of options and descriptions
+options = {
+    "1": [text_data, "Text Data"],
+    "2": [vcard, "vCard"],
+}
+
+
+# Get and confirm error correction level
+invalid = False
+while True:
+    clearTerminal()
+
+    # Handle last input invalid
+    if invalid:
+        print("Invalid selection. Please try again.\n")
+        invalid = False
+
+    # Print selection options
+    print("What kind of QR Code do you want to make?")
+    for key, value in options.items():
+        print(f"\t{key}. {value[1]}")
+
+    # Get User input
+    limit = max(map(int, options.keys()))
+    selection = input(f"Make a selection (1-{limit}): ")
+    clearTerminal()
+
+    # Verify User Input
+    try:        
+        # Check if input is what user desires
+        print(f"Please confirm that '{options[selection][1]}' is the QR Code Type you want?")
+        choice = input("(y/n): ")
+        if choice.lower()[0] == "y":
+            break
+
+    except KeyError:
+        invalid = True
+
+# Run selection option
+options[selection][0]()
