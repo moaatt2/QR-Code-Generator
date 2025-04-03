@@ -2,6 +2,15 @@ import os
 import qrcode
 
 
+# Data for error correction levels
+correction_mapping = {
+    '1': ["L", qrcode.constants.ERROR_CORRECT_L,  "7% of data can be restored",],
+    '2': ["M", qrcode.constants.ERROR_CORRECT_M, "15% of data can be restored",],
+    '3': ["Q", qrcode.constants.ERROR_CORRECT_Q, "25% of data can be restored",],
+    '4': ["H", qrcode.constants.ERROR_CORRECT_H, "30% of data can be restored",],
+}
+
+
 # terminal clearing utilty function
 def clearTerminal():
     os.system("cls" if os.name == "nt" else "clear")
@@ -24,13 +33,6 @@ def get_filename():
 
 # Define a function to get  the error correction level
 def get_correction_level():
-    # Error correction mapping
-    correction_mapping = {
-        '1': ["L", qrcode.constants.ERROR_CORRECT_L],
-        '2': ["M", qrcode.constants.ERROR_CORRECT_M],
-        '3': ["Q", qrcode.constants.ERROR_CORRECT_Q],
-        '4': ["H", qrcode.constants.ERROR_CORRECT_H],
-    }
 
     # Set indicator variable to check if input is valid
     invalid = False
@@ -46,11 +48,9 @@ def get_correction_level():
 
         # Ask user for input
         print("What level of error correction do you want?")
-        print("\t1. Level L - 7% of data can be restored")
-        print("\t2. Level M - 15% of data can be restored")
-        print("\t3. Level Q - 25% of data can be restored")
-        print("\t4. Level H - 30% of data can be restored")
-        correction_level = input("Make a selection (1-4): ")
+        for k, v in correction_mapping.items():
+            print(f"\t{k}. Level {v[0]} - {v[2]}")
+        correction_level = input(f"Make a selection (1-{max(correction_mapping.keys())}): ")
         clearTerminal()
 
         try:        
