@@ -95,8 +95,46 @@ def vcard():
     # Add Testing Data
     data = "BEGIN:VCARDD\n"
     data += "VERSION:4.0\n"
+    # Formatted Name
+    ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.1
     data += "FN:John Doe\n"
+
+    # Name
+    ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.2
+    ## Format: N:Last Name;First Name;Middle Name;Prefix;Suffix
     data += "N:Doe;John;;;\n"
+
+    # Note
+    ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.2
+
+    # Photo
+    ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.4
+
+    # Revision
+    ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.4
+
+    # Sound
+    ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.5
+
+    # Source
+    ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.1.3
+
+    # Telephone
+    ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.1
+
+    # Gender
+    ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.7
+
+    # Email
+    ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.2
+
+    # Calendar URI
+    ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.9.3
+
+    # Birthday
+    ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.5
+    data += "BDAY:19900101\n"
+
     data += "END:VCARD"
 
     # Get Filename
