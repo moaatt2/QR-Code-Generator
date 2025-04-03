@@ -92,7 +92,22 @@ def text_data():
 
 # Main Loop for handling vCard data
 def vcard():
-    print('TODO')
+    # Add Testing Data
+    data = "BEGIN:VCARDD\n"
+    data += "VERSION:4.0\n"
+    data += "FN:John Doe\n"
+    data += "N:Doe;John;;;\n"
+    data += "END:VCARD"
+
+    # Get Filename
+    filename = get_filename()
+
+    # Get Correction Level
+    correction_level = get_correction_level()
+
+    # Make and save qr code
+    img = qrcode.make(data, error_correction=correction_level)
+    img.save(f"output/{filename}.png")
 
 
 # List of options and descriptions
