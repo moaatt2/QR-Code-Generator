@@ -130,6 +130,7 @@ def vcard():
 
     # Calendar URI
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.9.3
+    data += "CALURI:http://example.com/calendar/jdoe\n"
 
     # Birthday
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.5
