@@ -127,6 +127,8 @@ def vcard():
 
     # Email
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.2
+    data += "EMAIL;TYPE=work:john_doe@work.com\n"
+    data += "EMAIL;TYPE=home:john_doe@example.com\n"
 
     # Calendar URI
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.9.3
