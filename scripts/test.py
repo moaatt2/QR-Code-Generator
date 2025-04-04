@@ -122,9 +122,6 @@ def vcard():
     # Telephone
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.1
 
-    # Gender
-    ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.7
-
     # Email
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.2
     data += "EMAIL;TYPE=work:john_doe@work.com\n"
