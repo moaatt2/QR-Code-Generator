@@ -121,6 +121,8 @@ def vcard():
 
     # Telephone
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.1
+    data += "TEL;TYPE=cell:(000) 000-0000\n"
+    data += "TEL;TYPE=fax:(100) 000-0000\n"
 
     # Email
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.2
