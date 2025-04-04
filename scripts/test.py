@@ -138,10 +138,12 @@ def vcard():
     data += "END:VCARD"
 
     # Get Filename
-    filename = get_filename()
+    # filename = get_filename()
+    filename = "vCardTest"
 
     # Get Correction Level
-    correction_level = get_correction_level()
+    # correction_level = get_correction_level()
+    correction_level = qrcode.constants.ERROR_CORRECT_L
 
     # Make and save qr code
     img = qrcode.make(data, error_correction=correction_level)
