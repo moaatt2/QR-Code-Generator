@@ -116,9 +116,6 @@ def vcard():
     # Sound
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.5
 
-    # Source
-    ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.1.3
-
     # Telephone
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.1
     data += "TEL;TYPE=cell:(000) 000-0000\n"
