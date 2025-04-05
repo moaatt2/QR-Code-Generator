@@ -115,6 +115,7 @@ def vcard():
 
     # Sound
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.5
+    data += "SOUND:https://ia600509.us.archive.org/16/items/TobyFoxMegalovania/Toby%20Fox%20-%20Megalovania.mp3\n"
 
     # Source
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.1.3
