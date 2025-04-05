@@ -1,5 +1,6 @@
 import os
 import qrcode
+import datetime as dt
 
 
 # Data for error correction levels
@@ -112,6 +113,8 @@ def vcard():
 
     # Revision
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.4
+    now = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    data += f"REV:{now}\n"
 
     # Sound
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.5
