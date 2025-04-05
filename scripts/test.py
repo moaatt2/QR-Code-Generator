@@ -108,9 +108,6 @@ def vcard():
     # Note
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.2
 
-    # Photo
-    ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.4
-
     # Revision
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.4
     now = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
