@@ -107,6 +107,7 @@ def vcard():
 
     # Note
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.2
+    data += "NOTE:This is a sample note.\n"
 
     # Revision
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.4
