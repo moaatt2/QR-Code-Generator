@@ -32,6 +32,19 @@ def get_filename():
     return filename
 
 
+# Helper function that asks a question and gives a confirmation
+def question_with_confirmation(question, confirmation):
+    while True:
+        clearTerminal()
+        response = input(question)
+        clearTerminal()
+        print(confirmation.format(response))
+        choice = input("(y/n): ")
+        if choice.lower()[0] == "y":
+            break
+    return response
+
+
 # Define a function to get  the error correction level
 def get_correction_level():
 
@@ -96,9 +109,14 @@ def vcard():
     # Add Testing Data
     data = "BEGIN:VCARDD\n"
     data += "VERSION:4.0\n"
+
     # Formatted Name
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.1
-    data += "FN:John Doe\n"
+    formatted_name = question_with_confirmation(
+        "Please enter the name as you want it displayed:\n",
+        "Are you sure that '{}' is the name you want displayed?"
+    )
+    data += f"FN:{formatted_name}\n"
 
     # Name
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.2
