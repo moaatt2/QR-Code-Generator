@@ -32,6 +32,7 @@ def get_filename():
     return filename
 
 
+# TODO: add an optional input of a cleaning function that the response is passed to
 # Helper function that asks a question and gives a confirmation
 def question_with_confirmation(question, confirmation):
     while True:
@@ -43,6 +44,9 @@ def question_with_confirmation(question, confirmation):
         if choice.lower()[0] == "y":
             break
     return response
+
+
+# TODO: Write a cleaning function to remove unwanted characters from text
 
 
 # Define a function to get  the error correction level
@@ -121,7 +125,27 @@ def vcard():
     # Name
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.2
     ## Format: N:Last Name;First Name;Middle Name;Prefix;Suffix
-    data += "N:Doe;John;;;\n"
+    last_name = question_with_confirmation(
+        "Please enter the last name:\n",
+        "Are you sure that '{}' is the last name you want?"        
+    )
+    first_name = question_with_confirmation(
+        "Please enter the first name:\n",
+        "Are you sure that '{}' is the first name you want?"
+    )
+    middle_name = question_with_confirmation(
+        "Please enter the middle name:\nLeave it blank if you don't want to include one.\n",
+        "Are you sure that '{}' is the middle name you want?"
+    )
+    prefix = question_with_confirmation(
+        "Please enter the prefix:\nLeave it blank if you don't want to include one.\n",
+        "Are you sure that '{}' is the prefix you want?"
+    )
+    suffix = question_with_confirmation(
+        "Please enter the suffix:\nLeave it blank if you don't want to include one.\n",
+        "Are you sure that '{}' is the suffix you want?"
+    )
+    data += f"N:{last_name};{first_name};{middle_name};{prefix};{suffix}\n"
 
     # Note
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.2
