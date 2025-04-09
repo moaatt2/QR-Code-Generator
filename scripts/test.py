@@ -32,12 +32,13 @@ def get_filename():
     return filename
 
 
-# TODO: add an optional input of a cleaning function that the response is passed to
 # Helper function that asks a question and gives a confirmation
-def question_with_confirmation(question, confirmation):
+def question_with_confirmation(question, confirmation, cleaning_function=None):
     while True:
         clearTerminal()
         response = input(question)
+        if cleaning_function:
+            response = cleaning_function(response)
         clearTerminal()
         print(confirmation.format(response))
         choice = input("(y/n): ")
