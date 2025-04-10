@@ -47,7 +47,13 @@ def question_with_confirmation(question, confirmation, cleaning_function=None):
     return response
 
 
-# TODO: Write a cleaning function to remove unwanted characters from text
+# Create a function that creates a function that will 
+def create_cleaner(*characters):
+    def cleaner(text):
+        for char in characters:
+            text = text.replace(char, "")
+        return text
+    return cleaner
 
 
 # Define a function to get  the error correction level
