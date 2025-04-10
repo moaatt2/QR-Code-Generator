@@ -50,9 +50,10 @@ def question_with_confirmation(question, confirmation, cleaning_function=create_
             response = cleaning_function(response)
         clearTerminal()
         print(confirmation.format(response))
-        choice = input("(y/n): ")
-        if choice.lower()[0] == "y":
-            break
+        choice = input("(y/n): ").lower()
+        if len(choice) > 0:
+            if choice[0] == "y":
+                break
     return response
 
 
