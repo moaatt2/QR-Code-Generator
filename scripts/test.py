@@ -32,8 +32,17 @@ def get_filename():
     return filename
 
 
+# Create a function that creates a function that will 
+def create_cleaner(*characters):
+    def cleaner(text):
+        for char in characters:
+            text = text.replace(char, "")
+        return text
+    return cleaner
+
+
 # Helper function that asks a question and gives a confirmation
-def question_with_confirmation(question, confirmation, cleaning_function=None):
+def question_with_confirmation(question, confirmation, cleaning_function=create_cleaner(";", ":")):
     while True:
         clearTerminal()
         response = input(question)
@@ -45,15 +54,6 @@ def question_with_confirmation(question, confirmation, cleaning_function=None):
         if choice.lower()[0] == "y":
             break
     return response
-
-
-# Create a function that creates a function that will 
-def create_cleaner(*characters):
-    def cleaner(text):
-        for char in characters:
-            text = text.replace(char, "")
-        return text
-    return cleaner
 
 
 # Define a function to get  the error correction level
