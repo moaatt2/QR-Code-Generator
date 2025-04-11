@@ -157,7 +157,12 @@ def vcard():
 
     # Note
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.2
-    data += "NOTE:This is a sample note.\n"
+    note = question_with_confirmation(
+        "Please enter the note you want included.\nLeave it blank if you don't want to include one.\n",
+        "Are you sure that '{}' is the note you want?"
+    )
+    if note != "":
+        data += f"NOTE:{note}.\n"
 
     # Revision
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.4
