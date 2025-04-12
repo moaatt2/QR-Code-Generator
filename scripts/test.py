@@ -194,6 +194,9 @@ def vcard():
     # TODO: Add support for multiple phone numbers
     # TODO: Add phone number verification
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.1
+    ## Format: TEL;TYPE=type1,type2,...:number
+    ## Types: home, work, cell, fax, pager, video, text, voice
+    ## Example: TEL;TYPE=cell:(000) 000-0000
     phone_number = question_with_confirmation(
         "Please enter the phone number you want included.\nLeave it blank if you don't want to include one.\n",
         "Are you sure that '{}' is the phone number you want?"
