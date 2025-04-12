@@ -190,6 +190,9 @@ def vcard():
         data += f"SOURCE:{source_url}\n"
 
     # Telephone
+    # TODO: Add support for phone number types
+    # TODO: Add support for multiple phone numbers
+    # TODO: Add phone number verification
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.1
     phone_number = question_with_confirmation(
         "Please enter the phone number you want included.\nLeave it blank if you don't want to include one.\n",
