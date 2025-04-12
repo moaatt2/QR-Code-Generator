@@ -171,6 +171,12 @@ def vcard():
 
     # Sound
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.5
+    sound_url = question_with_confirmation(
+        "Please enter the URL of the sound file you want included.\nLeave it blank if you don't want to include one.\n",
+        "Are you sure that '{}' is the URL of the sound file you want?"
+    )
+    if sound_url != "":
+        data += f"SOUND:{sound_url}\n"
     data += "SOUND:https://ia600509.us.archive.org/16/items/TobyFoxMegalovania/Toby%20Fox%20-%20Megalovania.mp3\n"
 
     # Source
