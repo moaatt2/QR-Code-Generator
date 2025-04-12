@@ -178,7 +178,6 @@ def vcard():
     )
     if sound_url != "":
         data += f"SOUND:{sound_url}\n"
-    data += "SOUND:https://ia600509.us.archive.org/16/items/TobyFoxMegalovania/Toby%20Fox%20-%20Megalovania.mp3\n"
 
     # Source
     # TODO: Add URL verification
