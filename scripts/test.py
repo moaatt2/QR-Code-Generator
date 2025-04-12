@@ -170,6 +170,7 @@ def vcard():
     data += f"REV:{now}\n"
 
     # Sound
+    # TODO: Add URL verification
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.5
     sound_url = question_with_confirmation(
         "Please enter the URL of the sound file you want included.\nLeave it blank if you don't want to include one.\n",
@@ -180,8 +181,14 @@ def vcard():
     data += "SOUND:https://ia600509.us.archive.org/16/items/TobyFoxMegalovania/Toby%20Fox%20-%20Megalovania.mp3\n"
 
     # Source
+    # TODO: Add URL verification
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.1.3
-    data += "SOURCE:http://johndoe.com/vcard.vcf\n"
+    source_url = question_with_confirmation(
+        "Please enter the URL of the where an up to date version of this vCard found.\nLeave it blank if you don't want to include one.\n",
+        "Are you sure that '{}' is the URL of the up to date vCard file you want?"
+    )
+    if source_url != "":
+        data += f"SOURCE:{source_url}\n"
 
     # Telephone
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.1
