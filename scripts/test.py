@@ -191,8 +191,12 @@ def vcard():
 
     # Telephone
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.1
-    data += "TEL;TYPE=cell:(000) 000-0000\n"
-    data += "TEL;TYPE=fax:(100) 000-0000\n"
+    phone_number = question_with_confirmation(
+        "Please enter the phone number you want included.\nLeave it blank if you don't want to include one.\n",
+        "Are you sure that '{}' is the phone number you want?"
+    )
+    if phone_number != "":
+        data += f"TEL:{phone_number}\n"
 
     # Email
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.2
