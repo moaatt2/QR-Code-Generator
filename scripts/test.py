@@ -219,6 +219,7 @@ def vcard():
         data += f"EMAIL:{email}\n"
 
     # Calendar URI
+    # TODO: Add URL verification
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.9.3
     calendar_url = question_with_confirmation(
         "Please enter the URL of the calendar you want included.\nLeave it blank if you don't want to include one.\n",
