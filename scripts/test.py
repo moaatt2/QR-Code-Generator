@@ -220,7 +220,12 @@ def vcard():
 
     # Calendar URI
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.9.3
-    data += "CALURI:http://example.com/calendar/jdoe\n"
+    calendar_url = question_with_confirmation(
+        "Please enter the URL of the calendar you want included.\nLeave it blank if you don't want to include one.\n",
+        "Are you sure that '{}' is the URL of the calendar you want?"
+    )
+    if calendar_url != "":
+        data += f"CALURI:{calendar_url}\n"
 
     # Birthday
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.5
