@@ -230,7 +230,13 @@ def vcard():
 
     # Birthday
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.5
-    data += "BDAY:19900101\n"
+    birthday = question_with_confirmation(
+        "Please enter the birthday you want included (in YYYY-MM-DD format).\nLeave it blank if you don't want to include one.\n",
+        "Are you sure that '{}' is the birthday you want?"
+    )
+    if birthday != "":
+        year, month, day = birthday.split("-")
+        data += f"BDAY:{year}{month}{day}\n"
 
     data += "END:VCARD"
 
