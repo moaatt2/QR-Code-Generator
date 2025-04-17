@@ -229,7 +229,10 @@ def vcard():
         data += f"CALURI:{calendar_url}\n"
 
     # Birthday
+    # TODO: Add Date Verification
+    # TODO: Handle invalid user entry
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.5
+    ## Format: BDAY:YYYYMMDD
     birthday = question_with_confirmation(
         "Please enter the birthday you want included (in YYYY-MM-DD format).\nLeave it blank if you don't want to include one.\n",
         "Are you sure that '{}' is the birthday you want?"
