@@ -42,13 +42,36 @@ def create_cleaner(*characters):
 
 
 # Helper function that asks a question and gives a confirmation
-def question_with_confirmation(question, confirmation, cleaning_function=create_cleaner(";", ":")):
+def question_with_confirmation(question,
+                               confirmation,
+                               cleaning_function=create_cleaner(";", ":"),
+                               validation_function=None,
+                               ):
+    
+    invalid = False
     while True:
+
+        # Start Loop by Clearing Terminal
         clearTerminal()
+
+        # Handle Restarting due to invalid input
+        if invalid:
+            print("Invalid response. Please try again.\n")
+            invalid = False
+
+        # Ask User for input
         response = input(question)
         if cleaning_function:
             response = cleaning_function(response)
         clearTerminal()
+
+        # Handle Validation
+        if validation_function:
+            if not validation_function(response):
+                invalid = True
+                continue
+
+        # Request Confirmation From User
         print(confirmation.format(response))
         choice = input("(y/n): ").lower()
         if len(choice) > 0:
