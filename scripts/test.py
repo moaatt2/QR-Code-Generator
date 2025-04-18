@@ -41,31 +41,12 @@ def create_cleaner(*characters):
     return cleaner
 
 
-## TODO: Simplify this by using strptime
 # Validate the Birthdate provide by the user - Ensure that it is in YYYY-MM-DD format
 def validate_date(test_date: str) -> bool:
     try:
-        assert test_date.count("-") == 2         # Has 3 parts separted by dashes
 
-        # Split the date into parts
-        year  = test_date.split("-")[0]
-        month = test_date.split("-")[1]
-        day   = test_date.split("-")[2]
-
-        # Validate part lengths
-        assert len(year)  == 4 # Year is 4 digits
-        assert len(month) == 2 # Month is 2 digits
-        assert len(day)   == 2 # Day is 2 digits
-
-        # Convert date parts to integers
-        year  = int(year)
-        month = int(month)
-        day   = int(day)
-
-        # Roughly Validate date validity
-        assert year >= 1800               # Ensure year is reasonable
-        assert month >= 1 and month <= 12 # Ensure month is valid
-        assert day >= 1 and day <= 31     # Ensure day is reasonable
+        # convert date to date time object, if user provided invaid value it will throw a ValueError
+        dt.datetime.strptime(test_date, "%Y-%m-%d")
 
         # Return True if all checks pass
         return True
