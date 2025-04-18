@@ -41,6 +41,7 @@ def create_cleaner(*characters):
     return cleaner
 
 
+## TODO: Simplify this by using strptime
 # Validate the Birthdate provide by the user - Ensure that it is in YYYY-MM-DD format
 def validate_date(test_date: str) -> bool:
     try:
@@ -287,6 +288,7 @@ def vcard():
         data += f"CALURI:{calendar_url}\n"
 
     # Birthday
+    ## TODO: Additionally verify that birthday is a day that has happened.
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.5
     ## Format: BDAY:YYYYMMDD
     birthday = question_with_confirmation(
