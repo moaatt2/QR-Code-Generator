@@ -41,6 +41,41 @@ def create_cleaner(*characters):
     return cleaner
 
 
+# Validate the Birthdate provide by the user - Ensure that it is in YYYY-MM-DD format
+def validate_date(test_date: str) -> bool:
+    try:
+        assert test_date.count("-") == 2         # Has 3 parts separted by dashes
+
+        # Split the date into parts
+        year  = test_date.split("-")[0]
+        month = test_date.split("-")[1]
+        day   = test_date.split("-")[2]
+
+        # Validate part lengths
+        assert len(year)  == 4 # Year is 4 digits
+        assert len(month) == 2 # Month is 2 digits
+        assert len(day)   == 2 # Day is 2 digits
+
+        # Convert date parts to integers
+        year  = int(year)
+        month = int(month)
+        day   = int(day)
+
+        # Roughly Validate date validity
+        assert year >= 1800               # Ensure year is reasonable
+        assert month >= 1 and month <= 12 # Ensure month is valid
+        assert day >= 1 and day <= 31     # Ensure day is reasonable
+
+        # Return True if all checks pass
+        return True
+
+    except AssertionError:
+        return False
+
+    except ValueError:
+        return False
+
+
 # Helper function that asks a question and gives a confirmation
 def question_with_confirmation(question,
                                confirmation,
@@ -252,13 +287,12 @@ def vcard():
         data += f"CALURI:{calendar_url}\n"
 
     # Birthday
-    # TODO: Add Date Verification
-    # TODO: Handle invalid user entry
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.5
     ## Format: BDAY:YYYYMMDD
     birthday = question_with_confirmation(
         "Please enter the birthday you want included (in YYYY-MM-DD format).\nLeave it blank if you don't want to include one.\n",
-        "Are you sure that '{}' is the birthday you want?"
+        "Are you sure that '{}' is the birthday you want?",
+        validation_function=validate_date,
     )
     if birthday != "":
         year, month, day = birthday.split("-")
