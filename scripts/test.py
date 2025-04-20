@@ -42,11 +42,13 @@ def create_cleaner(*characters):
 
 
 # Validate the Birthdate provide by the user - Ensure that it is in YYYY-MM-DD format
-def validate_date(test_date: str) -> bool:
+def validate_birthdate(test_date: str) -> bool:
     try:
 
         # convert date to date time object, if user provided invaid value it will throw a ValueError
-        dt.datetime.strptime(test_date, "%Y-%m-%d")
+        parsed_date = dt.datetime.strptime(test_date, "%Y-%m-%d")
+
+        assert parsed_date.date() <= dt.date.today()
 
         # Return True if all checks pass
         return True
@@ -269,13 +271,12 @@ def vcard():
         data += f"CALURI:{calendar_url}\n"
 
     # Birthday
-    ## TODO: Additionally verify that birthday is a day that has happened.
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.2.5
     ## Format: BDAY:YYYYMMDD
     birthday = question_with_confirmation(
         "Please enter the birthday you want included (in YYYY-MM-DD format).\nLeave it blank if you don't want to include one.\n",
         "Are you sure that '{}' is the birthday you want?",
-        validation_function=validate_date,
+        validation_function=validate_birthdate,
     )
     if birthday != "":
         year, month, day = birthday.split("-")
