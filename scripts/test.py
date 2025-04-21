@@ -1,6 +1,7 @@
 import os
 import qrcode
 import datetime as dt
+import validators
 
 
 # Data for error correction levels
@@ -58,6 +59,22 @@ def validate_birthdate(test_date: str) -> bool:
 
     except ValueError:
         return False
+
+
+# Validate the URL provided by the user
+def validate_url(url: str) -> bool:
+    if validators.url(url):
+        return True
+    else:
+        return False
+
+
+# Create a variant of the validate_url function that allows for empty strings
+def validate_optional_url(url: str) -> bool:
+    if url == "":
+        return True
+    else:
+        return validate_url(url)
 
 
 # Helper function that asks a question and gives a confirmation
@@ -216,7 +233,9 @@ def vcard():
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.5
     sound_url = question_with_confirmation(
         "Please enter the URL of the sound file you want included.\nLeave it blank if you don't want to include one.\n",
-        "Are you sure that '{}' is the URL of the sound file you want?"
+        "Are you sure that '{}' is the URL of the sound file you want?",
+        cleaning_function=None,
+        validation_function=validate_optional_url,
     )
     if sound_url != "":
         data += f"SOUND:{sound_url}\n"
@@ -226,7 +245,9 @@ def vcard():
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.1.3
     source_url = question_with_confirmation(
         "Please enter the URL of the where an up to date version of this vCard found.\nLeave it blank if you don't want to include one.\n",
-        "Are you sure that '{}' is the URL of the up to date vCard file you want?"
+        "Are you sure that '{}' is the URL of the up to date vCard file you want?",
+        cleaning_function=None,
+        validation_function=validate_optional_url,
     )
     if source_url != "":
         data += f"SOURCE:{source_url}\n"
@@ -265,7 +286,9 @@ def vcard():
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.9.3
     calendar_url = question_with_confirmation(
         "Please enter the URL of the calendar you want included.\nLeave it blank if you don't want to include one.\n",
-        "Are you sure that '{}' is the URL of the calendar you want?"
+        "Are you sure that '{}' is the URL of the calendar you want?",
+        cleaning_function=None,
+        validation_function=validate_optional_url,
     )
     if calendar_url != "":
         data += f"CALURI:{calendar_url}\n"
