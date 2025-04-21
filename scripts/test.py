@@ -70,6 +70,7 @@ def validate_optional_birthdate(test_date: str) -> bool:
 
 
 # Validate the URL provided by the user
+# TODO: Allow for more flexible url formats(remove sheme requriement)
 def validate_url(url: str) -> bool:
     if validators.url(url):
         return True
@@ -237,7 +238,6 @@ def vcard():
     data += f"REV:{now}\n"
 
     # Sound
-    # TODO: Add URL verification
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.7.5
     sound_url = question_with_confirmation(
         "Please enter the URL of the sound file you want included.\nLeave it blank if you don't want to include one.\n",
@@ -249,7 +249,6 @@ def vcard():
         data += f"SOUND:{sound_url}\n"
 
     # Source
-    # TODO: Add URL verification
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.1.3
     source_url = question_with_confirmation(
         "Please enter the URL of the where an up to date version of this vCard found.\nLeave it blank if you don't want to include one.\n",
@@ -290,7 +289,6 @@ def vcard():
         data += f"EMAIL:{email}\n"
 
     # Calendar URI
-    # TODO: Add URL verification
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.9.3
     calendar_url = question_with_confirmation(
         "Please enter the URL of the calendar you want included.\nLeave it blank if you don't want to include one.\n",
