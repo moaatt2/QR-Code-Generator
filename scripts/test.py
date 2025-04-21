@@ -61,6 +61,14 @@ def validate_birthdate(test_date: str) -> bool:
         return False
 
 
+# Variation of validate_birthdate that allows for empty strings
+def validate_optional_birthdate(test_date: str) -> bool:
+    if test_date == "":
+        return True
+    else:
+        return validate_birthdate(test_date)
+
+
 # Validate the URL provided by the user
 def validate_url(url: str) -> bool:
     if validators.url(url):
@@ -299,7 +307,7 @@ def vcard():
     birthday = question_with_confirmation(
         "Please enter the birthday you want included (in YYYY-MM-DD format).\nLeave it blank if you don't want to include one.\n",
         "Are you sure that '{}' is the birthday you want?",
-        validation_function=validate_birthdate,
+        validation_function=validate_optional_birthdate,
     )
     if birthday != "":
         year, month, day = birthday.split("-")
