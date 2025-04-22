@@ -70,8 +70,13 @@ def validate_optional_birthdate(test_date: str) -> bool:
 
 
 # Validate the URL provided by the user
-# TODO: Allow for more flexible url formats(remove sheme requriement)
 def validate_url(url: str) -> bool:
+
+    # Allow schemeless urls by adding a scheme if one is not provided
+    if "://" not in url:
+        url = "http://" + url
+
+    # Check validity of URL
     if validators.url(url):
         return True
     else:
