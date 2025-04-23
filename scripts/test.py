@@ -293,8 +293,8 @@ def vcard():
         data += f"TEL:{phone_number}\n"
 
     # Email
+    # TODO: Add support for email types
     # TODO: Add support for multiple emails
-    # TODO: Add email verification
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.2
     ## Format: EMAIL;TYPE=type,...:number
     ## Known Types: home, work
