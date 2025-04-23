@@ -91,6 +91,19 @@ def validate_optional_url(url: str) -> bool:
         return validate_url(url)
 
 
+# Validate email provided by user
+def validate_optional_email(email: str) -> bool:
+    # Allow empty email
+    if email == "":
+        return True
+
+    # Validators email check wrapper
+    if validators.email(email):
+        return True
+    else:
+        return False
+
+
 # Helper function that asks a question and gives a confirmation
 def question_with_confirmation(question,
                                confirmation,
@@ -288,7 +301,8 @@ def vcard():
     # Example: EMAIL;TYPE=work:john_doe@work.com
     email = question_with_confirmation(
         "Please enter the email address you want included.\nLeave it blank if you don't want to include one.\n",
-        "Are you sure that '{}' is the email address you want?"
+        "Are you sure that '{}' is the email address you want?",
+        validation_function=validate_optional_email,
     )
     if email != "":
         data += f"EMAIL:{email}\n"
