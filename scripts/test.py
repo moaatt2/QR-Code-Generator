@@ -1,4 +1,5 @@
 import os
+import re
 import qrcode
 import datetime as dt
 import validators
@@ -102,6 +103,17 @@ def validate_optional_email(email: str) -> bool:
         return True
     else:
         return False
+
+
+# Validate phone number provided by user
+def validate_optional_phone_number(phone_number: str) -> bool:
+    # Allow empty phone number
+    if phone_number == "":
+        return True
+    
+    # Run regex match
+    matches = re.match(r"^\(\d{3}\) \d{3}-\d{4}$", phone_number)
+    return bool(matches)
 
 
 # Helper function that asks a question and gives a confirmation
@@ -280,14 +292,14 @@ def vcard():
     # Telephone
     # TODO: Add support for phone number types
     # TODO: Add support for multiple phone numbers
-    # TODO: Add phone number verification
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.1
     ## Format: TEL;TYPE=type1,type2,...:number
     ## Types: home, work, cell, fax, pager, video, text, voice
     ## Example: TEL;TYPE=cell:(000) 000-0000
     phone_number = question_with_confirmation(
         "Please enter the phone number you want included.\nLeave it blank if you don't want to include one.\n",
-        "Are you sure that '{}' is the phone number you want?"
+        "Are you sure that '{}' is the phone number you want?",
+        validation_function=validate_optional_phone_number,
     )
     if phone_number != "":
         data += f"TEL:{phone_number}\n"
