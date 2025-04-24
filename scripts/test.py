@@ -297,7 +297,7 @@ def vcard():
     ## Types: home, work, cell, fax, pager, video, text, voice
     ## Example: TEL;TYPE=cell:(000) 000-0000
     phone_number = question_with_confirmation(
-        "Please enter the phone number you want included.\nLeave it blank if you don't want to include one.\n",
+        "Please enter the phone number you want included, in (XXX) XXX-XXXX format.\nLeave it blank if you don't want to include one.\n",
         "Are you sure that '{}' is the phone number you want?",
         validation_function=validate_optional_phone_number,
     )
