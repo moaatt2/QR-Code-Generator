@@ -93,6 +93,14 @@ def validate_optional_url(url: str) -> bool:
 
 
 # Validate email provided by user
+def validate_email(email: str) -> bool:
+    if validators.email(email):
+        return True
+    else:
+        return False
+
+
+# Validate email provided by user
 def validate_optional_email(email: str) -> bool:
     # Allow empty email
     if email == "":
@@ -327,9 +335,9 @@ def vcard():
         if len(choice) > 0:
             if choice[0] == "y":
                 email = question_with_confirmation(
-                    "Please enter the email address you want included.\nLeave it blank if you don't want to include one.\n",
+                    "Please enter the email address you want included.\n",
                     "Are you sure that '{}' is the email address you want?",
-                    validation_function=validate_optional_email,
+                    validation_function=validate_email,
                 )
                 data += f"EMAIL:{email}\n"
                 emails_added += 1
