@@ -306,18 +306,36 @@ def vcard():
 
     # Email
     # TODO: Add support for email types
-    # TODO: Add support for multiple emails
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.2
     ## Format: EMAIL;TYPE=type,...:number
     ## Known Types: home, work
     # Example: EMAIL;TYPE=work:john_doe@work.com
-    email = question_with_confirmation(
-        "Please enter the email address you want included.\nLeave it blank if you don't want to include one.\n",
-        "Are you sure that '{}' is the email address you want?",
-        validation_function=validate_optional_email,
-    )
-    if email != "":
-        data += f"EMAIL:{email}\n"
+    emails_added = 0
+    while True:
+        # Determine what to ask user
+        if emails_added == 0:
+            question = "Would you like to add an email address?"
+        else:
+            question = "Would you like to add another email address?"
+        
+        # Ask question and get response
+        clearTerminal()
+        print(question)
+        choice = input("(y/n): ").lower()
+
+        # Handle Response
+        if len(choice) > 0:
+            if choice[0] == "y":
+                email = question_with_confirmation(
+                    "Please enter the email address you want included.\nLeave it blank if you don't want to include one.\n",
+                    "Are you sure that '{}' is the email address you want?",
+                    validation_function=validate_optional_email,
+                )
+                data += f"EMAIL:{email}\n"
+                emails_added += 1
+            else:
+                break
+
 
     # Calendar URI
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.9.3
