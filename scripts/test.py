@@ -114,6 +114,14 @@ def validate_optional_email(email: str) -> bool:
 
 
 # Validate phone number provided by user
+def validate_phone_number(phone_number: str) -> bool:
+    
+    # Run regex match
+    matches = re.match(r"^\(\d{3}\) \d{3}-\d{4}$", phone_number)
+    return bool(matches)
+
+
+# Validate phone number provided by user
 def validate_optional_phone_number(phone_number: str) -> bool:
     # Allow empty phone number
     if phone_number == "":
@@ -299,18 +307,35 @@ def vcard():
 
     # Telephone
     # TODO: Add support for phone number types
-    # TODO: Add support for multiple phone numbers
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.1
     ## Format: TEL;TYPE=type1,type2,...:number
     ## Types: home, work, cell, fax, pager, video, text, voice
     ## Example: TEL;TYPE=cell:(000) 000-0000
-    phone_number = question_with_confirmation(
-        "Please enter the phone number you want included, in (XXX) XXX-XXXX format.\nLeave it blank if you don't want to include one.\n",
-        "Are you sure that '{}' is the phone number you want?",
-        validation_function=validate_optional_phone_number,
-    )
-    if phone_number != "":
-        data += f"TEL:{phone_number}\n"
+    phone_numbers_added = 0
+    while True:
+        # Determine what to ask user
+        if phone_numbers_added == 0:
+            question = "Would you like to add a phone number?"
+        else:
+            question = "Would you like to add another phone number?"
+        
+        # Ask question and get response
+        clearTerminal()
+        print(question)
+        choice = input("(y/n): ").lower()
+
+        # Handle Response
+        if len(choice) > 0:
+            if choice[0] == "y":
+                phone_number = question_with_confirmation(
+                    "Please enter the phone number you want included, in (XXX) XXX-XXXX format.",
+                    "Are you sure that '{}' is the phone number you want?",
+                    validation_function=validate_phone_number,
+                )
+                data += f"EMAIL:{phone_number}\n"
+                phone_numbers_added += 1
+            else:
+                break
 
     # Email
     # TODO: Add support for email types
