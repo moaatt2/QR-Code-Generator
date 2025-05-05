@@ -332,7 +332,7 @@ def vcard():
                     "Are you sure that '{}' is the phone number you want?",
                     validation_function=validate_phone_number,
                 )
-                data += f"EMAIL:{phone_number}\n"
+                data += f"TEL:{phone_number}\n"
                 phone_numbers_added += 1
             else:
                 break
