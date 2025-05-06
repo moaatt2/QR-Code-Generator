@@ -13,6 +13,17 @@ correction_mapping = {
     '4': ["H", qrcode.constants.ERROR_CORRECT_H, "30% of data can be restored",],
 }
 
+# Data for phone number types
+phone_types = {
+    "1": ["text",      "text",      "text - the telephone number supports text messages."],
+    "2": ["voice",     "voice",     "voice - a voice telephone number."],
+    "3": ["fax",       "fax",       "fax - a facsimile telephone number."],
+    "4": ["cell",      "cell",      "cell - a cellular or mobile telephone number."],
+    "5": ["video",     "video",     "video - a video conferencing telephone number."],
+    "6": ["pager",     "pager",     "pager - a paging device telephone number."],
+    "7": ["textphone", "textphone", "textphone - a telecommunication device for people with hearing or speech difficulties."],
+}
+
 
 # terminal clearing utilty function
 def clearTerminal():
@@ -171,6 +182,43 @@ def question_with_confirmation(question,
     return response
 
 
+# Helper function that provides options and requests confirmation
+def options_with_confirmation(options, question, confirmation):
+
+    invalid = False
+    while True:
+
+        # Start Loop by Clearing Terminal
+        clearTerminal()
+
+        # Handle Restarting due to invalid input
+        if invalid:
+            print("Invalid response. Please try again.\n")
+            invalid = False
+
+        # Print question and options
+        print(question)
+        for k, v in options.items():
+            print(f"\t{k}. {v[2]}")
+
+        # Get User input
+        limit = max(map(int, options.keys()))
+        selection = input(f"Make a selection (1-{limit}): ")
+        clearTerminal()
+
+        # Verify User Input
+        try:        
+            # Check if input is what user desires
+            print(confirmation.format(options[selection][1]))
+            choice = input("(y/n): ")
+            if choice.lower()[0] == "y":
+                break
+
+        except KeyError:
+            invalid = True
+
+    return options[selection][0]
+
 # Define a function to get  the error correction level
 def get_correction_level():
 
@@ -306,7 +354,6 @@ def vcard():
         data += f"SOURCE:{source_url}\n"
 
     # Telephone
-    # TODO: Add support for phone number types
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.1
     ## Format: TEL;TYPE=type1,type2,...:number
     ## Types: home, work, cell, fax, pager, video, text, voice
@@ -332,7 +379,12 @@ def vcard():
                     "Are you sure that '{}' is the phone number you want?",
                     validation_function=validate_phone_number,
                 )
-                data += f"TEL:{phone_number}\n"
+                type = options_with_confirmation(
+                    phone_types,
+                    "What type of phone number is this?",
+                    "Are you sure that '{}' is the type of phone number you want?",
+                )
+                data += f"TEL;TYPE={type}:{phone_number}\n"
                 phone_numbers_added += 1
             else:
                 break
