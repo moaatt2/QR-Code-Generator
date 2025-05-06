@@ -256,7 +256,7 @@ def get_correction_level():
 
 
 # Main Loop for handling text data
-def text_data():
+def text_data(debug=False):
     # Get and confirm data
     while True:
         clearTerminal()
@@ -273,13 +273,18 @@ def text_data():
     # Get error correction level
     correction_level = get_correction_level()
 
+    if debug:
+        print("Debugging Information:")
+        print()
+        print(data)
+
     # Make and save qr code
     img = qrcode.make(data, error_correction=correction_level)
     img.save(f"output/{filename}.png")
 
 
 # Main Loop for handling vCard data
-def vcard():
+def vcard(debug=False):
     # Add Testing Data
     data = "BEGIN:VCARDD\n"
     data += "VERSION:4.0\n"
@@ -447,6 +452,11 @@ def vcard():
 
     data += "END:VCARD"
 
+    if debug:
+        print("Debugging Information:")
+        print()
+        print(data)
+
     # Get Filename
     # filename = get_filename()
     filename = "vCardTest"
@@ -499,4 +509,4 @@ while True:
         invalid = True
 
 # Run selection option
-options[selection][0]()
+options[selection][0](debug=True)
