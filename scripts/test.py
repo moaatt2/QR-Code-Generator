@@ -401,7 +401,6 @@ def vcard(debug=False):
                 break
 
     # Email
-    # TODO: Add support for email types
     ## Docs: https://datatracker.ietf.org/doc/html/rfc6350#section-6.4.2
     ## Format: EMAIL;TYPE=type,...:number
     ## Known Types: home, work
