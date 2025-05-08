@@ -24,6 +24,12 @@ phone_types = {
     "7": ["textphone", "textphone", "textphone - a telecommunication device for people with hearing or speech difficulties."],
 }
 
+# Data for email types
+email_types = {
+    "1": ["work", "work", "work - An email address associated with work."],
+    "2": ["home", "home", "home - An email address associated with personal life."],
+    "3": ["", "Work/Home", "Work/Home - An email address associated with both work and personal life."],
+}
 
 # terminal clearing utilty function
 def clearTerminal():
@@ -421,7 +427,15 @@ def vcard(debug=False):
                     "Are you sure that '{}' is the email address you want?",
                     validation_function=validate_email,
                 )
-                data += f"EMAIL:{email}\n"
+                type = options_with_confirmation(
+                    email_types,
+                    "What type of email address is this?",
+                    "Are you sure that '{}' is the type of email address you want?",
+                )
+                if type =="":
+                    data += f"EMAIL:{email}\n"
+                else:
+                    data += f"EMAIL;TYPE={type}:{email}\n"
                 emails_added += 1
             else:
                 break
