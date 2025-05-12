@@ -20,12 +20,12 @@ sidebar = tkinter.Frame(main_frame, width=200)
 sidebar.pack(side="right", fill="y")
 ttk.Button(sidebar, text="Update QR Code").pack(side="bottom", fill="x")
 
-# Create notbook tabs
+# Create notebook
 notebook_frame = tkinter.Frame(main_frame)
 notebook_frame.pack(side="left", expand=True, fill="both")
 notebook = ttk.Notebook(notebook_frame)
 
-# Create Notebook Tabs
+# Create Tabs to add to notebook
 raw_data = ttk.Frame(notebook)
 vCard = ttk.Frame(notebook)
 
