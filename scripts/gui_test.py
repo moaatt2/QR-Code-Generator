@@ -30,7 +30,9 @@ raw_data = ttk.Frame(notebook)
 vCard = ttk.Frame(notebook)
 
 # Add Content to Raw Data Tab
-tkinter.Label(raw_data, text="Enter data:").pack(pady=5)
+label = tkinter.Label(raw_data, text="QR Code Data:")
+label.config(font=("Arial", 10, "bold"))
+label.pack(pady=5)
 tkinter.Text(raw_data).pack(padx=10, pady=5, fill="both", expand=True)
 
 # Add Tabs to Notebook
