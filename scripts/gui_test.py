@@ -29,6 +29,10 @@ notebook = ttk.Notebook(notebook_frame)
 raw_data = ttk.Frame(notebook)
 vCard = ttk.Frame(notebook)
 
+# Add Content to Raw Data Tab
+tkinter.Label(raw_data, text="Enter data:").pack(pady=5)
+tkinter.Text(raw_data).pack(padx=10, pady=5, fill="both", expand=True)
+
 # Add Tabs to Notebook
 notebook.add(raw_data, text="Raw Data")
 notebook.add(vCard, text="vCard")
