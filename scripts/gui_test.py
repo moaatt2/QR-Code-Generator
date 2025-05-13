@@ -35,6 +35,10 @@ label.config(font=("Arial", 10, "bold"))
 label.pack(pady=5)
 tkinter.Text(raw_data).pack(padx=10, pady=5, fill="both", expand=True)
 
+# Add content to vCard Tab
+tkinter.Label(vCard, text="Display Name:").grid(row=0)
+tkinter.Entry(vCard).grid(row=0, column=1)
+
 # Add Tabs to Notebook
 notebook.add(raw_data, text="Raw Data")
 notebook.add(vCard, text="vCard")
