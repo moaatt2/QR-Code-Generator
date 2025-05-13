@@ -35,9 +35,35 @@ label.config(font=("Arial", 10, "bold"))
 label.pack(pady=5)
 tkinter.Text(raw_data).pack(padx=10, pady=5, fill="both", expand=True)
 
-# Add content to vCard Tab
+
+################################
+### Add content to vCard Tab ###
+################################
+
+# Displayname
 tkinter.Label(vCard, text="Display Name:").grid(row=0)
 tkinter.Entry(vCard).grid(row=0, column=1)
+
+# Suffix
+tkinter.Label(vCard, text="Prefix:").grid(row=1)
+tkinter.Entry(vCard).grid(row=1, column=1)
+
+# First Name
+tkinter.Label(vCard, text="First Name:").grid(row=2)
+tkinter.Entry(vCard).grid(row=2, column=1)
+
+# Middle Name
+tkinter.Label(vCard, text="Middle Name:").grid(row=3)
+tkinter.Entry(vCard).grid(row=3, column=1)
+
+# Last Name
+tkinter.Label(vCard, text="Last Name:").grid(row=4)
+tkinter.Entry(vCard).grid(row=4, column=1)
+
+# Prefix
+tkinter.Label(vCard, text="Suffix:").grid(row=5)
+tkinter.Entry(vCard).grid(row=5, column=1)
+
 
 # Add Tabs to Notebook
 notebook.add(raw_data, text="Raw Data")
