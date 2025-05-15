@@ -44,7 +44,7 @@ vCard.grid_columnconfigure(1, weight=1)
 
 # Add Name Section Label
 label = tkinter.Label(vCard, text="Name Section:")
-label.config(font=("Arial", 10, "bold"))
+label.config(font=("Arial", 11, "bold"))
 label.grid(row=0, columnspan=2, pady=5, sticky="ew")
 
 # Displayname
