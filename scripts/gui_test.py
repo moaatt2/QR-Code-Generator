@@ -48,27 +48,27 @@ label.config(font=("Arial", 10, "bold"))
 label.grid(row=0, columnspan=2, pady=5, sticky="ew")
 
 # Displayname
-tkinter.Label(vCard, text="Display Name:").grid(row=1)
+tkinter.Label(vCard, text="Display Name:").grid(row=1, sticky="e")
 tkinter.Entry(vCard).grid(row=1, column=1, sticky="ew", padx=(0, 5))
 
 # Suffix
-tkinter.Label(vCard, text="Prefix:").grid(row=2)
+tkinter.Label(vCard, text="Prefix:").grid(row=2, sticky="e")
 tkinter.Entry(vCard).grid(row=2, column=1, sticky="ew", padx=(0, 5))
 
 # First Name
-tkinter.Label(vCard, text="First Name:").grid(row=3)
+tkinter.Label(vCard, text="First Name:").grid(row=3, sticky="e")
 tkinter.Entry(vCard).grid(row=3, column=1, sticky="ew", padx=(0, 5))
 
 # Middle Name
-tkinter.Label(vCard, text="Middle Name:").grid(row=4)
+tkinter.Label(vCard, text="Middle Name:").grid(row=4, sticky="e")
 tkinter.Entry(vCard).grid(row=4, column=1, sticky="ew", padx=(0, 5))
 
 # Last Name
-tkinter.Label(vCard, text="Last Name:").grid(row=5)
+tkinter.Label(vCard, text="Last Name:").grid(row=5, sticky="e")
 tkinter.Entry(vCard).grid(row=5, column=1, sticky="ew", padx=(0, 5))
 
 # Prefix
-tkinter.Label(vCard, text="Suffix:").grid(row=6)
+tkinter.Label(vCard, text="Suffix:").grid(row=6, sticky="e")
 tkinter.Entry(vCard).grid(row=6, column=1, sticky="ew", padx=(0, 5))
 
 # Section End Separator
