@@ -51,7 +51,7 @@ label.grid(row=0, columnspan=2, pady=5, sticky="ew")
 tkinter.Label(vCard, text="Display Name:").grid(row=1, sticky="e")
 tkinter.Entry(vCard).grid(row=1, column=1, sticky="ew", padx=(0, 5))
 
-# Suffix
+# Prefix
 tkinter.Label(vCard, text="Prefix:").grid(row=2, sticky="e")
 tkinter.Entry(vCard).grid(row=2, column=1, sticky="ew", padx=(0, 5))
 
@@ -67,7 +67,7 @@ tkinter.Entry(vCard).grid(row=4, column=1, sticky="ew", padx=(0, 5))
 tkinter.Label(vCard, text="Last Name:").grid(row=5, sticky="e")
 tkinter.Entry(vCard).grid(row=5, column=1, sticky="ew", padx=(0, 5))
 
-# Prefix
+# Suffix
 tkinter.Label(vCard, text="Suffix:").grid(row=6, sticky="e")
 tkinter.Entry(vCard).grid(row=6, column=1, sticky="ew", padx=(0, 5))
 
