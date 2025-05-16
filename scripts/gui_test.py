@@ -36,9 +36,9 @@ label.pack(pady=5)
 tkinter.Text(raw_data).pack(padx=10, pady=5, fill="both", expand=True)
 
 
-################################
-### Add content to vCard Tab ###
-################################
+#####################################
+### Add Name Section to vCard Tab ###
+#####################################
 
 vCard.grid_columnconfigure(1, weight=1)
 
@@ -74,6 +74,25 @@ tkinter.Entry(vCard).grid(row=6, column=1, sticky="ew", padx=(0, 5))
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=7, columnspan=2, sticky="ew", pady=5)
 
+#####################################
+### Add Note Section to vCard Tab ###
+#####################################
+
+# Add Name Section Label
+label = tkinter.Label(vCard, text="Notes Section:")
+label.config(font=("Arial", 11, "bold"))
+label.grid(row=8, columnspan=2, pady=(5,0), sticky="ew")
+
+# Add Name Section Label
+label = tkinter.Label(vCard, text="Leave this blank if you don't want to include a note.")
+label.config(font=("Arial", 7))
+label.grid(row=9, columnspan=2, pady=(0,5), sticky="w")
+
+# Add Text Entry Section
+tkinter.Text(vCard, height=3).grid(row=10, columnspan=2, padx=10, pady=5)
+
+# Section End Separator
+ttk.Separator(vCard, orient="horizontal").grid(row=11, columnspan=2, sticky="ew", pady=5)
 
 # Add Tabs to Notebook
 notebook.add(raw_data, text="Raw Data")
