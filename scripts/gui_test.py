@@ -83,7 +83,7 @@ label = tkinter.Label(vCard, text="Notes Section:")
 label.config(font=("Arial", 11, "bold"))
 label.grid(row=8, columnspan=2, pady=(5,0), sticky="ew")
 
-# Add Name Section Label
+# Add note about leaving blank
 label = tkinter.Label(vCard, text="Leave this blank if you don't want to include a note.")
 label.config(font=("Arial", 7))
 label.grid(row=9, columnspan=2, pady=(0,5), sticky="w")
@@ -103,7 +103,7 @@ label = tkinter.Label(vCard, text="Sound Link:")
 label.config(font=("Arial", 11, "bold"))
 label.grid(row=12, columnspan=2, pady=(5,0), sticky="ew")
 
-# Add Name Section Label
+# Add note about leaving blank
 label = tkinter.Label(vCard, text="Leave this blank if you don't want to include a Sound Link.")
 label.config(font=("Arial", 7))
 label.grid(row=13, columnspan=2, pady=(0,5), sticky="w")
