@@ -9,7 +9,7 @@ from tkinter import ttk
 # Create primary frame to hold QR sidebar and content entry notebook
 window = tkinter.Tk()
 window.title("QR Code Generator")
-window.geometry("400x400")
+window.geometry("400x500")
 
 # Create Main Frame to hold notebook and sidebar
 main_frame = tkinter.Frame(window)
@@ -93,6 +93,26 @@ tkinter.Text(vCard, height=3).grid(row=10, columnspan=2, padx=10, pady=5)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=11, columnspan=2, sticky="ew", pady=5)
+
+###########################################
+### Add Sound Link Section to vCard Tab ###
+###########################################
+
+# Add Name Section Label
+label = tkinter.Label(vCard, text="Sound Link:")
+label.config(font=("Arial", 11, "bold"))
+label.grid(row=12, columnspan=2, pady=(5,0), sticky="ew")
+
+# Add Name Section Label
+label = tkinter.Label(vCard, text="Leave this blank if you don't want to include a Sound Link.")
+label.config(font=("Arial", 7))
+label.grid(row=13, columnspan=2, pady=(0,5), sticky="w")
+
+# Add Text Entry Section
+tkinter.Entry(vCard).grid(row=14, columnspan=2, sticky="ew", pady=5)
+
+# Section End Separator
+ttk.Separator(vCard, orient="horizontal").grid(row=15, columnspan=2, sticky="ew", pady=5)
 
 # Add Tabs to Notebook
 notebook.add(raw_data, text="Raw Data")
