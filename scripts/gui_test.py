@@ -9,7 +9,7 @@ from tkinter import ttk
 # Create primary frame to hold QR sidebar and content entry notebook
 window = tkinter.Tk()
 window.title("QR Code Generator")
-window.geometry("400x600")
+window.geometry("400x700")
 
 # Create Main Frame to hold notebook and sidebar
 main_frame = tkinter.Frame(window)
@@ -134,6 +134,31 @@ tkinter.Entry(vCard).grid(row=18, columnspan=2, sticky="ew", pady=5)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=19, columnspan=2, sticky="ew", pady=5)
+
+#############################################
+### Add Phone Number Section to vCard Tab ###
+#############################################
+
+# Add Name Section Label
+label = tkinter.Label(vCard, text="Phone Number:")
+label.config(font=("Arial", 11, "bold"))
+label.grid(row=20, columnspan=2, pady=(5,0), sticky="ew")
+
+# Add note about leaving blank
+label = tkinter.Label(vCard, text="Leave this blank if you don't want to include a Phone Number.")
+label.config(font=("Arial", 7))
+label.grid(row=21, columnspan=2, pady=(0,5), sticky="w")
+
+# Phone Number
+tkinter.Label(vCard, text="Phone Number:").grid(row=22, sticky="e")
+tkinter.Entry(vCard).grid(row=22, column=1, sticky="ew", padx=(0, 5))
+
+# Phone Type
+tkinter.Label(vCard, text="Phone Type:").grid(row=23, sticky="e")
+ttk.Combobox(vCard, values=["Cell", "Home", "Work"], state="readonly").grid(row=23, column=1, sticky="ew", padx=(0, 5))
+
+# Section End Separator
+ttk.Separator(vCard, orient="horizontal").grid(row=24, columnspan=2, sticky="ew", pady=5)
 
 # Add Tabs to Notebook
 notebook.add(raw_data, text="Raw Data")
