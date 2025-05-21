@@ -11,15 +11,20 @@ from tkinter import ttk
 ################
 
 phone_types = [
-    "Cell",
-    "Home",
-    "Work",
+    "",
+    "text",
+    "voice",
+    "fax",
+    "cell",
+    "video",
+    "pager",
+    "textphone",
 ]
 
 email_types = [
+    "",
     "Work",
     "Home",
-    "Work/Home",
 ]
 
 #####################
