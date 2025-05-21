@@ -6,6 +6,26 @@ import validators
 import tkinter
 from tkinter import ttk
 
+################
+### Settings ###
+################
+
+phone_types = [
+    "Cell",
+    "Home",
+    "Work",
+]
+
+email_types = [
+    "Work",
+    "Home",
+    "Work/Home",
+]
+
+#####################
+### Tkinter Setup ###
+#####################
+
 # Create primary frame to hold QR sidebar and content entry notebook
 window = tkinter.Tk()
 window.title("QR Code Generator")
@@ -155,7 +175,7 @@ tkinter.Entry(vCard).grid(row=22, column=1, sticky="ew", padx=(0, 5))
 
 # Phone Type
 tkinter.Label(vCard, text="Phone Type:").grid(row=23, sticky="e")
-ttk.Combobox(vCard, values=["Cell", "Home", "Work"], state="readonly").grid(row=23, column=1, sticky="ew", padx=(0, 5))
+ttk.Combobox(vCard, values=phone_types, state="readonly").grid(row=23, column=1, sticky="ew", padx=(0, 5))
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=24, columnspan=2, sticky="ew", pady=5)
@@ -180,7 +200,7 @@ tkinter.Entry(vCard).grid(row=27, column=1, sticky="ew", padx=(0, 5))
 
 # Email Type
 tkinter.Label(vCard, text="Email Type:").grid(row=28, sticky="e")
-ttk.Combobox(vCard, values=["Work", "Home", "Work/Home"], state="readonly").grid(row=28, column=1, sticky="ew", padx=(0, 5))
+ttk.Combobox(vCard, values=email_types, state="readonly").grid(row=28, column=1, sticky="ew", padx=(0, 5))
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=29, columnspan=2, sticky="ew", pady=5)
