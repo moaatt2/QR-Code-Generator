@@ -34,7 +34,7 @@ email_types = [
 # Create primary frame to hold QR sidebar and content entry notebook
 window = tkinter.Tk()
 window.title("QR Code Generator")
-window.geometry("400x800")
+window.geometry("400x900")
 
 # Create Main Frame to hold notebook and sidebar
 main_frame = tkinter.Frame(window)
@@ -209,6 +209,26 @@ ttk.Combobox(vCard, values=email_types, state="readonly").grid(row=28, column=1,
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=29, columnspan=2, sticky="ew", pady=5)
+
+#############################################
+### Add Calendar URI Section to vCard Tab ###
+#############################################
+
+# Add Name Section Label
+label = tkinter.Label(vCard, text="Calendar Link:")
+label.config(font=("Arial", 11, "bold"))
+label.grid(row=30, columnspan=2, pady=(5,0), sticky="ew")
+
+# Add note about leaving blank
+label = tkinter.Label(vCard, text="This is intended to be a link to an\nonline calendar showing your availability.\nLeave this blank if you don't want to include a Calendar Link.")
+label.config(font=("Arial", 7))
+label.grid(row=31, columnspan=2, pady=(0,5), sticky="w")
+
+# Add Text Entry Section
+tkinter.Entry(vCard).grid(row=32, columnspan=2, sticky="ew", pady=5)
+
+# Section End Separator
+ttk.Separator(vCard, orient="horizontal").grid(row=33, columnspan=2, sticky="ew", pady=5)
 
 # Add Tabs to Notebook
 notebook.add(raw_data, text="Raw Data")
