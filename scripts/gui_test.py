@@ -150,7 +150,7 @@ label.config(font=("Arial", 11, "bold"))
 label.grid(row=16, columnspan=2, pady=(5,0), sticky="ew")
 
 # Add note about leaving blank
-label = tkinter.Label(vCard, text="This is intended to be a link to where an up to\ndate vCard file of this contact can be found.\nLeave this blank if you don't want to include a Source Link.")
+label = tkinter.Label(vCard, justify="left", text="This is intended to be a link to where an up to\ndate vCard file of this contact can be found.\nLeave this blank if you don't want to include a Source Link.")
 label.config(font=("Arial", 7))
 label.grid(row=17, columnspan=2, pady=(0,5), sticky="w")
 
@@ -220,7 +220,7 @@ label.config(font=("Arial", 11, "bold"))
 label.grid(row=30, columnspan=2, pady=(5,0), sticky="ew")
 
 # Add note about leaving blank
-label = tkinter.Label(vCard, text="This is intended to be a link to an\nonline calendar showing your availability.\nLeave this blank if you don't want to include a Calendar Link.")
+label = tkinter.Label(vCard, justify="left", text="This is intended to be a link to an\nonline calendar showing your availability.\nLeave this blank if you don't want to include a Calendar Link.")
 label.config(font=("Arial", 7))
 label.grid(row=31, columnspan=2, pady=(0,5), sticky="w")
 
