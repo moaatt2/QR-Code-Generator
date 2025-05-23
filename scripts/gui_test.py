@@ -114,7 +114,7 @@ label.config(font=("Arial", 7))
 label.grid(row=9, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Text Entry Section
-tkinter.Text(vCard, height=3).grid(row=10, columnspan=2, padx=10, pady=5)
+tkinter.Text(vCard, height=3).grid(row=10, columnspan=2, padx=5, pady=5)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=11, columnspan=2, sticky="ew", pady=5)
@@ -134,7 +134,7 @@ label.config(font=("Arial", 7))
 label.grid(row=13, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Text Entry Section
-tkinter.Entry(vCard).grid(row=14, columnspan=2, sticky="ew", pady=5)
+tkinter.Entry(vCard).grid(row=14, columnspan=2, sticky="ew", pady=5, padx=5)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=15, columnspan=2, sticky="ew", pady=5)
@@ -155,7 +155,7 @@ label.config(font=("Arial", 7))
 label.grid(row=17, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Text Entry Section
-tkinter.Entry(vCard).grid(row=18, columnspan=2, sticky="ew", pady=5)
+tkinter.Entry(vCard).grid(row=18, columnspan=2, sticky="ew", pady=5, padx=5)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=19, columnspan=2, sticky="ew", pady=5)
@@ -225,7 +225,7 @@ label.config(font=("Arial", 7))
 label.grid(row=31, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Text Entry Section
-tkinter.Entry(vCard).grid(row=32, columnspan=2, sticky="ew", pady=5)
+tkinter.Entry(vCard).grid(row=32, columnspan=2, sticky="ew", pady=5, padx=5)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=33, columnspan=2, sticky="ew", pady=5)
