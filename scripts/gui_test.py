@@ -241,12 +241,12 @@ label.config(font=("Arial", 11, "bold"))
 label.grid(row=34, columnspan=2, pady=(5,0), sticky="ew")
 
 # Add note about leaving blank
-label = tkinter.Label(vCard, justify="left", text="Leave this blank if you don't want to include your Birthday.")
+label = tkinter.Label(vCard, justify="left", text="Leave this blank if you don't want to include your Birthday.\nDates should be formatted as YYYY-MM-DD.")
 label.config(font=("Arial", 7))
 label.grid(row=35, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Date Entry Section
-tkcalendar.DateEntry(vCard, date_pattern="yyyy-mm-dd", background='darkblue', foreground='white').grid(row=36, columnspan=2, sticky="ew", pady=5, padx=5)
+tkcalendar.DateEntry(vCard, state="readonly", date_pattern="yyyy-mm-dd", background='darkblue', foreground='white').grid(row=36, columnspan=2, sticky="ew", pady=5, padx=5)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=37, columnspan=2, sticky="ew", pady=5)
