@@ -246,7 +246,7 @@ label.config(font=("Arial", 7))
 label.grid(row=35, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Date Entry Section
-tkcalendar.DateEntry(vCard, background='darkblue', foreground='white').grid(row=36, columnspan=2, sticky="ew", pady=5, padx=5)
+tkcalendar.DateEntry(vCard, date_pattern="yyyy-mm-dd", background='darkblue', foreground='white').grid(row=36, columnspan=2, sticky="ew", pady=5, padx=5)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=37, columnspan=2, sticky="ew", pady=5)
