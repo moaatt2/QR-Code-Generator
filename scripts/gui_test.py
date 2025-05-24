@@ -4,6 +4,7 @@ import qrcode
 import datetime as dt
 import validators
 import tkinter
+import tkcalendar
 from tkinter import ttk
 
 ################
@@ -34,7 +35,7 @@ email_types = [
 # Create primary frame to hold QR sidebar and content entry notebook
 window = tkinter.Tk()
 window.title("QR Code Generator")
-window.geometry("400x900")
+window.geometry("400x1000")
 
 # Create Main Frame to hold notebook and sidebar
 main_frame = tkinter.Frame(window)
@@ -229,6 +230,26 @@ tkinter.Entry(vCard).grid(row=32, columnspan=2, sticky="ew", pady=5, padx=5)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=33, columnspan=2, sticky="ew", pady=5)
+
+#########################################
+### Add Birthday Section to vCard Tab ###
+##########################################
+
+# Add Name Section Label
+label = tkinter.Label(vCard, text="Birthday:")
+label.config(font=("Arial", 11, "bold"))
+label.grid(row=34, columnspan=2, pady=(5,0), sticky="ew")
+
+# Add note about leaving blank
+label = tkinter.Label(vCard, justify="left", text="Leave this blank if you don't want to include your Birthday.")
+label.config(font=("Arial", 7))
+label.grid(row=35, columnspan=2, pady=(0,5), sticky="w")
+
+# Add Text Entry Section
+tkcalendar.DateEntry(vCard, background='darkblue', foreground='white').grid(row=36, column=1, sticky="ew", pady=5, padx=5)
+
+# Section End Separator
+ttk.Separator(vCard, orient="horizontal").grid(row=37, columnspan=2, sticky="ew", pady=5)
 
 # Add Tabs to Notebook
 notebook.add(raw_data, text="Raw Data")
