@@ -30,10 +30,8 @@ text.window_create('1.0', window=vCard)
 
 # Add content to vCard Tab
 for number in range(30):
-    l = tk.Label(vCard, text='Input:', bg='red')
-    l.grid(row=number, column=0, sticky='we')
-    l = tk.Label(vCard, text=number, bg='green')
-    l.grid(row=number, column=1, sticky='we')
+    ttk.Label(vCard, text=f"Field {number}").grid(row=number, column=0, sticky="e", padx=5, pady=2)
+    ttk.Entry(vCard).grid(row=number, column=1, sticky="ew", padx=5, pady=2)
 
 # Add Tabs to Notebook
 notebook.add(raw_data, text="Raw Data")
