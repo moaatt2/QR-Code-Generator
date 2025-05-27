@@ -6,6 +6,7 @@ from tkinter.scrolledtext import ScrolledText
 window = tk.Tk()
 window.title("QR Code Generator")
 window.geometry("400x400")
+window. resizable(False, False)
 
 # Create Main Frame to hold notebook and sidebar
 main_frame = tk.Frame(window)
@@ -24,9 +25,22 @@ notebook = ttk.Notebook(notebook_frame)
 # Create Tabs to add to notebook
 raw_data = ttk.Frame(notebook)
 
-text = ScrolledText(notebook, state="disable", bg="#F0F0F0")
-vCard = ttk.Frame(text)
-text.window_create('1.0', window=vCard)
+# Create container with scroll bar and display vCard
+vCardContainer = ttk.Frame(notebook)
+canvas = tk.Canvas(vCardContainer, highlightthickness=0)
+scrollbar = ttk.Scrollbar(vCardContainer, orient="vertical", command=canvas.yview)
+vCard = ttk.Frame(canvas)
+vCard.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+canvas.create_window((0, 0), window=vCard, anchor="nw")
+
+# Layout the canvas and scrollbar
+canvas.pack(side="left", fill="both", expand=True)
+scrollbar.pack(side="right", fill="y")
+
+# Configure scrolling to work with mouse wheel
+def _on_mousewheel(event):
+    canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+canvas.bind_all("<MouseWheel>", _on_mousewheel)
 
 # Add content to vCard Tab
 for number in range(30):
@@ -35,7 +49,7 @@ for number in range(30):
 
 # Add Tabs to Notebook
 notebook.add(raw_data, text="Raw Data")
-notebook.add(text, text="vCard")
+notebook.add(vCardContainer, text="vCard")
 
 # Add notebook to UI
 notebook.pack(expand=True, fill="both")
