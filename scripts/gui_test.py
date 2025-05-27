@@ -6,6 +6,7 @@ import validators
 import tkinter
 import tkcalendar
 from tkinter import ttk
+from tkinter.scrolledtext import ScrolledText
 
 ################
 ### Settings ###
@@ -35,7 +36,7 @@ email_types = [
 # Create primary frame to hold QR sidebar and content entry notebook
 window = tkinter.Tk()
 window.title("QR Code Generator")
-window.geometry("400x1000")
+window.geometry("400x400")
 
 # Create Main Frame to hold notebook and sidebar
 main_frame = tkinter.Frame(window)
@@ -53,7 +54,10 @@ notebook = ttk.Notebook(notebook_frame)
 
 # Create Tabs to add to notebook
 raw_data = ttk.Frame(notebook)
-vCard = ttk.Frame(notebook)
+
+vCardContainer = ScrolledText(notebook, state="disable", bg="#F0F0F0")
+vCard = ttk.Frame(vCardContainer)
+vCardContainer.window_create('1.0', window=vCard)
 
 # Add Content to Raw Data Tab
 label = tkinter.Label(raw_data, text="QR Code Data:")
@@ -253,7 +257,7 @@ ttk.Separator(vCard, orient="horizontal").grid(row=37, columnspan=2, sticky="ew"
 
 # Add Tabs to Notebook
 notebook.add(raw_data, text="Raw Data")
-notebook.add(vCard, text="vCard")
+notebook.add(vCardContainer, text="vCard")
 
 # Add notebook to UI
 notebook.pack(expand=True, fill="both")
