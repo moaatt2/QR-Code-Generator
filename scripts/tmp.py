@@ -43,9 +43,10 @@ canvas.pack(side="left", fill="both", expand=True)
 scrollbar.pack(side="right", fill="y")
 
 # Configure scrolling to work with mouse wheel
-def _on_mousewheel(event):
-    canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-canvas.bind_all("<MouseWheel>", _on_mousewheel)
+def on_mousewheel(event):
+    if notebook.index("current") == notebook.index(vCardContainer):
+        canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+canvas.bind_all("<MouseWheel>", on_mousewheel)
 
 # Add content to vCard Tab
 for number in range(30):
