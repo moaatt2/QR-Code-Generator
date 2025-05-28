@@ -31,7 +31,12 @@ canvas = tk.Canvas(vCardContainer, highlightthickness=0)
 scrollbar = ttk.Scrollbar(vCardContainer, orient="vertical", command=canvas.yview)
 vCard = ttk.Frame(canvas)
 vCard.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
-canvas.create_window((0, 0), window=vCard, anchor="nw")
+vCardWindow = canvas.create_window((0, 0), window=vCard, anchor="nw")
+
+# Ensure that the frame in the canvas takes up full width of the canvas.
+def resize_inner_frame(event):
+    canvas.itemconfigure(vCardWindow, width=event.width)
+canvas.bind("<Configure>", resize_inner_frame)
 
 # Layout the canvas and scrollbar
 canvas.pack(side="left", fill="both", expand=True)
