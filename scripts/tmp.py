@@ -42,16 +42,17 @@ canvas.bind("<Configure>", resize_inner_frame)
 canvas.pack(side="left", fill="both", expand=True)
 scrollbar.pack(side="right", fill="y")
 
-# Configure scrolling to work with mouse wheel
-def on_mousewheel(event):
-    if notebook.index("current") == notebook.index(vCardContainer):
-        canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-canvas.bind_all("<MouseWheel>", on_mousewheel)
-
 # Add content to vCard Tab
 for number in range(30):
     ttk.Label(vCard, text=f"Field {number}").grid(row=number, column=0, sticky="e", padx=5, pady=2)
     ttk.Entry(vCard).grid(row=number, column=1, sticky="ew", padx=5, pady=2)
+
+# Recursively bind mousewheel to vCard and all child elements to enable scrolling
+def bind_mousewheel_recursive(widget, func):
+    widget.bind("<MouseWheel>", func)
+    for child in widget.winfo_children():
+        bind_mousewheel_recursive(child, func)
+bind_mousewheel_recursive(vCard, lambda event: canvas.yview_scroll(int(-1 * (event.delta / 120)), "units"))
 
 # Add Tabs to Notebook
 notebook.add(raw_data, text="Raw Data")
