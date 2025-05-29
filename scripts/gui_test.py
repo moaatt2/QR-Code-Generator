@@ -54,10 +54,24 @@ notebook = ttk.Notebook(notebook_frame)
 
 # Create Tabs to add to notebook
 raw_data = ttk.Frame(notebook)
+vCardContainer = ttk.Frame(notebook)
 
-vCardContainer = ScrolledText(notebook, state="disable", bg="#F0F0F0")
-vCard = ttk.Frame(vCardContainer)
-vCardContainer.window_create('1.0', window=vCard)
+# Create scrollable canvas and container for vCard
+canvas = tkinter.Canvas(vCardContainer, highlightthickness=0)
+scrollbar = ttk.Scrollbar(vCardContainer, orient="vertical", command=canvas.yview)
+vCard = ttk.Frame(canvas)
+vCard.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
+vCardWindow = canvas.create_window((0, 0), window=vCard, anchor="nw")
+
+# Ensure that the frame in the canvas takes up full width of the canvas.
+def resize_inner_frame(event):
+    canvas.itemconfigure(vCardWindow, width=event.width)
+canvas.bind("<Configure>", resize_inner_frame)
+
+# Layout the canvas and scrollbar
+canvas.pack(side="left", fill="both", expand=True)
+scrollbar.pack(side="right", fill="y")
+
 
 # Add Content to Raw Data Tab
 label = tkinter.Label(raw_data, text="QR Code Data:")
@@ -254,6 +268,13 @@ tkcalendar.DateEntry(vCard, state="readonly", date_pattern="yyyy-mm-dd", backgro
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=37, columnspan=2, sticky="ew", pady=5)
+
+# Recursively bind mousewheel to vCard and all child elements to enable scrolling
+def bind_mousewheel_recursive(widget, func):
+    widget.bind("<MouseWheel>", func)
+    for child in widget.winfo_children():
+        bind_mousewheel_recursive(child, func)
+bind_mousewheel_recursive(vCard, lambda event: canvas.yview_scroll(int(-1 * (event.delta / 120)), "units"))
 
 # Add Tabs to Notebook
 notebook.add(raw_data, text="Raw Data")
