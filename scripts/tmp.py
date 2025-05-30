@@ -42,6 +42,9 @@ canvas.bind("<Configure>", resize_inner_frame)
 canvas.pack(side="left", fill="both", expand=True)
 scrollbar.pack(side="right", fill="y")
 
+# Tell vCard's second column (with entries) to expand
+vCard.columnconfigure(1, weight=1)
+
 # Add content to vCard Tab
 for number in range(30):
     ttk.Label(vCard, text=f"Field {number}").grid(row=number, column=0, sticky="e", padx=5, pady=2)
