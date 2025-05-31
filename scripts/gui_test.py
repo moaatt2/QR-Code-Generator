@@ -6,7 +6,7 @@ import validators
 import tkinter
 import tkcalendar
 from tkinter import ttk
-from tkinter.scrolledtext import ScrolledText
+from ttkbootstrap.scrolled import ScrolledFrame
 
 ################
 ### Settings ###
@@ -54,24 +54,7 @@ notebook = ttk.Notebook(notebook_frame)
 
 # Create Tabs to add to notebook
 raw_data = ttk.Frame(notebook)
-vCardContainer = ttk.Frame(notebook)
-
-# Create scrollable canvas and container for vCard
-canvas = tkinter.Canvas(vCardContainer, highlightthickness=0)
-scrollbar = ttk.Scrollbar(vCardContainer, orient="vertical", command=canvas.yview)
-vCard = ttk.Frame(canvas)
-vCard.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
-vCardWindow = canvas.create_window((0, 0), window=vCard, anchor="nw")
-
-# Ensure that the frame in the canvas takes up full width of the canvas.
-def resize_inner_frame(event):
-    canvas.itemconfigure(vCardWindow, width=event.width)
-canvas.bind("<Configure>", resize_inner_frame)
-
-# Layout the canvas and scrollbar
-canvas.pack(side="left", fill="both", expand=True)
-scrollbar.pack(side="right", fill="y")
-
+vCard = ScrolledFrame(notebook, autohide=False)
 
 # Add Content to Raw Data Tab
 label = tkinter.Label(raw_data, text="QR Code Data:")
@@ -84,7 +67,7 @@ tkinter.Text(raw_data).pack(padx=10, pady=5, fill="both", expand=True)
 ### Add Name Section to vCard Tab ###
 #####################################
 
-vCard.grid_columnconfigure(1, weight=1)
+vCard.columnconfigure(1, weight=1)
 
 # Add Name Section Label
 label = tkinter.Label(vCard, text="Name Section:")
@@ -264,21 +247,14 @@ label.config(font=("Arial", 7))
 label.grid(row=35, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Date Entry Section
-tkcalendar.DateEntry(vCard, state="readonly", date_pattern="yyyy-mm-dd", background='darkblue', foreground='white').grid(row=36, columnspan=2, sticky="ew", pady=5, padx=5)
+# tkcalendar.DateEntry(vCard, state="readonly", date_pattern="yyyy-mm-dd", background='darkblue', foreground='white').grid(row=36, columnspan=2, sticky="ew", pady=5, padx=5)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=37, columnspan=2, sticky="ew", pady=5)
 
-# Recursively bind mousewheel to vCard and all child elements to enable scrolling
-def bind_mousewheel_recursive(widget, func):
-    widget.bind("<MouseWheel>", func)
-    for child in widget.winfo_children():
-        bind_mousewheel_recursive(child, func)
-bind_mousewheel_recursive(vCard, lambda event: canvas.yview_scroll(int(-1 * (event.delta / 120)), "units"))
-
 # Add Tabs to Notebook
 notebook.add(raw_data, text="Raw Data")
-notebook.add(vCardContainer, text="vCard")
+notebook.add(vCard.container, text="vCard")
 
 # Add notebook to UI
 notebook.pack(expand=True, fill="both")
