@@ -24,7 +24,7 @@ notebook = ttk.Notebook(notebook_frame)
 
 # Create Tabs to add to notebook
 raw_data = ttk.Frame(notebook)
-vCard = ScrolledFrame(notebook)
+vCard = ScrolledFrame(notebook, autohide=False)
 
 # Tell vCard's second column (with entries) to expand
 vCard.columnconfigure(1, weight=1)
@@ -32,7 +32,7 @@ vCard.columnconfigure(1, weight=1)
 # Add content to vCard Tab
 for number in range(30):
     ttk.Label(vCard, text=f"Field {number}").grid(row=number, column=0, sticky="e", padx=5, pady=2)
-    ttk.Entry(vCard).grid(row=number, column=1, sticky="ew", padx=5, pady=2)
+    ttk.Entry(vCard).grid(row=number, column=1, sticky="ew", padx=(0, 15), pady=2)
 
 # Add Tabs to Notebook
 notebook.add(raw_data, text="Raw Data")
