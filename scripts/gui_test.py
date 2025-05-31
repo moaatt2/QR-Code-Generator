@@ -76,27 +76,27 @@ label.grid(row=0, columnspan=2, pady=5, sticky="ew")
 
 # Displayname
 tkinter.Label(vCard, text="Display Name:").grid(row=1, sticky="e")
-tkinter.Entry(vCard).grid(row=1, column=1, sticky="ew", padx=(0, 5))
+tkinter.Entry(vCard).grid(row=1, column=1, sticky="ew", padx=(0, 15))
 
 # Prefix
 tkinter.Label(vCard, text="Prefix:").grid(row=2, sticky="e")
-tkinter.Entry(vCard).grid(row=2, column=1, sticky="ew", padx=(0, 5))
+tkinter.Entry(vCard).grid(row=2, column=1, sticky="ew", padx=(0, 15))
 
 # First Name
 tkinter.Label(vCard, text="First Name:").grid(row=3, sticky="e")
-tkinter.Entry(vCard).grid(row=3, column=1, sticky="ew", padx=(0, 5))
+tkinter.Entry(vCard).grid(row=3, column=1, sticky="ew", padx=(0, 15))
 
 # Middle Name
 tkinter.Label(vCard, text="Middle Name:").grid(row=4, sticky="e")
-tkinter.Entry(vCard).grid(row=4, column=1, sticky="ew", padx=(0, 5))
+tkinter.Entry(vCard).grid(row=4, column=1, sticky="ew", padx=(0, 15))
 
 # Last Name
 tkinter.Label(vCard, text="Last Name:").grid(row=5, sticky="e")
-tkinter.Entry(vCard).grid(row=5, column=1, sticky="ew", padx=(0, 5))
+tkinter.Entry(vCard).grid(row=5, column=1, sticky="ew", padx=(0, 15))
 
 # Suffix
 tkinter.Label(vCard, text="Suffix:").grid(row=6, sticky="e")
-tkinter.Entry(vCard).grid(row=6, column=1, sticky="ew", padx=(0, 5))
+tkinter.Entry(vCard).grid(row=6, column=1, sticky="ew", padx=(0, 15))
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=7, columnspan=2, sticky="ew", pady=5)
@@ -116,7 +116,7 @@ label.config(font=("Arial", 7))
 label.grid(row=9, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Text Entry Section
-tkinter.Text(vCard, height=3).grid(row=10, columnspan=2, padx=5, pady=5)
+tkinter.Text(vCard, height=3).grid(row=10, columnspan=2, padx=(5, 15), pady=5)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=11, columnspan=2, sticky="ew", pady=5)
@@ -136,7 +136,7 @@ label.config(font=("Arial", 7))
 label.grid(row=13, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Text Entry Section
-tkinter.Entry(vCard).grid(row=14, columnspan=2, sticky="ew", pady=5, padx=5)
+tkinter.Entry(vCard).grid(row=14, columnspan=2, sticky="ew", pady=5, padx=(5, 15))
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=15, columnspan=2, sticky="ew", pady=5)
@@ -157,7 +157,7 @@ label.config(font=("Arial", 7))
 label.grid(row=17, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Text Entry Section
-tkinter.Entry(vCard).grid(row=18, columnspan=2, sticky="ew", pady=5, padx=5)
+tkinter.Entry(vCard).grid(row=18, columnspan=2, sticky="ew", pady=5, padx=(5, 15))
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=19, columnspan=2, sticky="ew", pady=5)
@@ -178,11 +178,11 @@ label.grid(row=21, columnspan=2, pady=(0,5), sticky="w")
 
 # Phone Number
 tkinter.Label(vCard, text="Phone Number:").grid(row=22, sticky="e")
-tkinter.Entry(vCard).grid(row=22, column=1, sticky="ew", padx=(0, 5))
+tkinter.Entry(vCard).grid(row=22, column=1, sticky="ew", padx=(0, 15))
 
 # Phone Type
 tkinter.Label(vCard, text="Phone Type:").grid(row=23, sticky="e")
-ttk.Combobox(vCard, values=phone_types, state="readonly").grid(row=23, column=1, sticky="ew", padx=(0, 5))
+ttk.Combobox(vCard, values=phone_types, state="readonly").grid(row=23, column=1, sticky="ew", padx=(0, 15))
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=24, columnspan=2, sticky="ew", pady=5)
@@ -203,11 +203,11 @@ label.grid(row=26, columnspan=2, pady=(0,5), sticky="w")
 
 # Email
 tkinter.Label(vCard, text="Email Address:").grid(row=27, sticky="e")
-tkinter.Entry(vCard).grid(row=27, column=1, sticky="ew", padx=(0, 5))
+tkinter.Entry(vCard).grid(row=27, column=1, sticky="ew", padx=(0, 15))
 
 # Email Type
 tkinter.Label(vCard, text="Email Type:").grid(row=28, sticky="e")
-ttk.Combobox(vCard, values=email_types, state="readonly").grid(row=28, column=1, sticky="ew", padx=(0, 5))
+ttk.Combobox(vCard, values=email_types, state="readonly").grid(row=28, column=1, sticky="ew", padx=(0, 15))
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=29, columnspan=2, sticky="ew", pady=5)
@@ -227,7 +227,7 @@ label.config(font=("Arial", 7))
 label.grid(row=31, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Text Entry Section
-tkinter.Entry(vCard).grid(row=32, columnspan=2, sticky="ew", pady=5, padx=5)
+tkinter.Entry(vCard).grid(row=32, columnspan=2, sticky="ew", pady=5, padx=(5, 15))
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=33, columnspan=2, sticky="ew", pady=5)
