@@ -4,7 +4,6 @@ import qrcode
 import datetime as dt
 import validators
 import tkinter
-import tkcalendar
 import ttkbootstrap
 from tkinter import ttk
 from ttkbootstrap.scrolled import ScrolledFrame
@@ -248,7 +247,6 @@ label.config(font=("Arial", 7))
 label.grid(row=35, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Date Entry Section
-# tkcalendar.DateEntry(vCard, state="readonly", date_pattern="yyyy-mm-dd", background='darkblue', foreground='white').grid(row=36, columnspan=2, sticky="ew", pady=5, padx=5)
 date_entry = ttkbootstrap.DateEntry(vCard, dateformat="%Y-%m-%d")
 date_entry.grid(row=36, columnspan=2, sticky="ew", pady=5, padx=(5, 15))
 date_entry.entry.bind("<Key>", lambda e: "break")
