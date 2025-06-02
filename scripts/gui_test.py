@@ -5,6 +5,7 @@ import datetime as dt
 import validators
 import tkinter
 import tkcalendar
+import ttkbootstrap
 from tkinter import ttk
 from ttkbootstrap.scrolled import ScrolledFrame
 
@@ -248,6 +249,7 @@ label.grid(row=35, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Date Entry Section
 # tkcalendar.DateEntry(vCard, state="readonly", date_pattern="yyyy-mm-dd", background='darkblue', foreground='white').grid(row=36, columnspan=2, sticky="ew", pady=5, padx=5)
+ttkbootstrap.DateEntry(vCard, dateformat="%Y-%m-%d").grid(row=36, columnspan=2, sticky="ew", pady=5, padx=(5, 15))
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=37, columnspan=2, sticky="ew", pady=5)
