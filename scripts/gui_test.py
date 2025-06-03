@@ -184,7 +184,6 @@ tkinter.Entry(vCard).grid(row=22, column=1, sticky="ew", padx=(0, 15))
 tkinter.Label(vCard, text="Phone Type:").grid(row=23, sticky="e")
 phone_type = ttk.Combobox(vCard, values=phone_types, state="readonly")
 phone_type.grid(row=23, column=1, sticky="ew", padx=(0, 15))
-phone_type.bind("<<ComboboxSelected>>", lambda e: e.widget.selection_clear())
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=24, columnspan=2, sticky="ew", pady=5)
@@ -211,7 +210,6 @@ tkinter.Entry(vCard).grid(row=27, column=1, sticky="ew", padx=(0, 15))
 tkinter.Label(vCard, text="Email Type:").grid(row=28, sticky="e")
 email_type = ttk.Combobox(vCard, values=email_types, state="readonly")
 email_type.grid(row=28, column=1, sticky="ew", padx=(0, 15))
-email_type.bind("<<ComboboxSelected>>", lambda e: e.widget.selection_clear())
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=29, columnspan=2, sticky="ew", pady=5)
@@ -264,5 +262,17 @@ notebook.add(vCard.container, text="vCard")
 
 # Add notebook to UI
 notebook.pack(expand=True, fill="both")
+
+
+#####################
+### Event Binding ###
+#####################
+
+## Combobox Behaviour
+for box in [phone_type, email_type]:
+
+    # Ignore highlighting value after selection
+    box.bind("<<ComboboxSelected>>", lambda e: e.widget.selection_clear())
+
 
 window.mainloop()
