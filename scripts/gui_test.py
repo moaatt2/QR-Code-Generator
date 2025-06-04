@@ -269,10 +269,15 @@ notebook.pack(expand=True, fill="both")
 #####################
 
 ## Combobox Behaviour
+
+def block_and_forward_scroll(event, widget):
+    widget.event_generate("<MouseWheel>", delta=event.delta)
+    return "break"
+
 for box in [phone_type, email_type]:
 
     # Ignore highlighting value after selection
     box.bind("<<ComboboxSelected>>", lambda e: e.widget.selection_clear())
-
+    box.bind("<MouseWheel>", lambda e, w=vCard: block_and_forward_scroll(e, w))
 
 window.mainloop()
