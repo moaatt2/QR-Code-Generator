@@ -269,21 +269,23 @@ notebook.pack(expand=True, fill="both")
 #####################
 
 ## Combobox Behaviour
+boxes = [phone_type, email_type]
 
 def block_and_forward_scroll(event):
     vCard.event_generate("<MouseWheel>", delta=event.delta)
     return "break"
+
 
 def box_updated(event):
     # Clear selection to avoid
     event.widget.selection_clear()
 
     # Allow scrolling but block updates
-    for box in [phone_type, email_type]:
+    for box in boxes:
         box.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
 
 
-for box in [phone_type, email_type]:
+for box in boxes:
     box.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
     box.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
 
