@@ -274,10 +274,17 @@ def block_and_forward_scroll(event):
     vCard.event_generate("<MouseWheel>", delta=event.delta)
     return "break"
 
-for box in [phone_type, email_type]:
+def box_updated(event):
+    # Clear selection to avoid
+    event.widget.selection_clear()
 
-    # Ignore highlighting value after selection
-    box.bind("<<ComboboxSelected>>", lambda e: e.widget.selection_clear())
+    # Allow scrolling but block updates
+    for box in [phone_type, email_type]:
+        box.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
+
+
+for box in [phone_type, email_type]:
+    box.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
     box.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
 
 window.mainloop()
