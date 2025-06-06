@@ -40,14 +40,46 @@ label = tkinter.Label(vCard, text="Leave this blank if you don't want to include
 label.config(font=("Arial", 7))
 label.grid(row=26, columnspan=2, pady=(0,5), sticky="w")
 
+
+emailFrame = ttk.Frame(vCard)
+emailFrame.grid(row=27, columnspan=2, sticky="ew")
+emailFrame.columnconfigure(1, weight=1)
+
 # Email
-tkinter.Label(vCard, text="Email Address:").grid(row=27, sticky="e")
-tkinter.Entry(vCard).grid(row=27, column=1, sticky="ew", padx=(0, 15))
+tkinter.Label(emailFrame, text="Email Address:").grid(row=1, sticky="e")
+tkinter.Entry(emailFrame).grid(row=1, column=1, sticky="ew", padx=(0, 15))
 
 # Email Type
-tkinter.Label(vCard, text="Email Type:").grid(row=28, sticky="e")
-email_type = ttk.Combobox(vCard, values=email_types, state="readonly")
-email_type.grid(row=28, column=1, sticky="ew", padx=(0, 15))
+tkinter.Label(emailFrame, text="Email Type:").grid(row=2, sticky="e")
+email_type = ttk.Combobox(emailFrame, values=email_types, state="readonly")
+email_type.grid(row=2, column=1, sticky="ew", padx=(0, 15))
+
+
+emails = 1
+email_types = list()
+email_types.append(email_type)
+email_add_button = ttk.Button(emailFrame, text="Add Add Additional Email")
+email_add_button.grid(row=3, columnspan=2, sticky="ew", pady=5, padx=(5,15))
+def add_email():
+    global emails
+    # Move button down
+
+
+
+    # Email
+    r = 1 + 2*emails
+    tkinter.Label(emailFrame, text="Email Address:").grid(row=r, sticky="e")
+    tkinter.Entry(emailFrame).grid(row=r, column=1, sticky="ew", padx=(0, 15))
+
+    r += 1
+    tkinter.Label(emailFrame, text="Email Type:").grid(row=r, sticky="e")
+    email_type = ttk.Combobox(emailFrame, values=email_types, state="readonly")
+    email_type.grid(row=r, column=1, sticky="ew", padx=(0, 15))
+
+    emails += 1
+
+    print("Hello World")
+email_add_button.config(command=add_email)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=29, columnspan=2, sticky="ew", pady=5)
