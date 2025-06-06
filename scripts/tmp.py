@@ -56,29 +56,27 @@ email_type.grid(row=2, column=1, sticky="ew", padx=(0, 15))
 
 
 emails = 1
-email_types = list()
-email_types.append(email_type)
 email_add_button = ttk.Button(emailFrame, text="Add Add Additional Email")
 email_add_button.grid(row=3, columnspan=2, sticky="ew", pady=5, padx=(5,15))
 def add_email():
     global emails
-    # Move button down
 
-
-
-    # Email
+    # Add email field
     r = 1 + 2*emails
     tkinter.Label(emailFrame, text="Email Address:").grid(row=r, sticky="e")
     tkinter.Entry(emailFrame).grid(row=r, column=1, sticky="ew", padx=(0, 15))
 
+    # Add email type field
     r += 1
     tkinter.Label(emailFrame, text="Email Type:").grid(row=r, sticky="e")
     email_type = ttk.Combobox(emailFrame, values=email_types, state="readonly")
     email_type.grid(row=r, column=1, sticky="ew", padx=(0, 15))
 
+    # Increment email count
     emails += 1
 
-    print("Hello World")
+    # Move button down
+    email_add_button.grid(row=r+1, columnspan=2, sticky="ew", pady=5, padx=(5,15))
 email_add_button.config(command=add_email)
 
 # Section End Separator
