@@ -56,6 +56,8 @@ email_type.grid(row=2, column=1, sticky="ew", padx=(0, 15))
 
 
 emails = 1
+combo_boxes = list()
+combo_boxes.append(email_type)
 email_add_button = ttk.Button(emailFrame, text="Add Add Additional Email")
 email_add_button.grid(row=3, columnspan=2, sticky="ew", pady=5, padx=(5,15))
 def add_email():
@@ -71,12 +73,16 @@ def add_email():
     tkinter.Label(emailFrame, text="Email Type:").grid(row=r, sticky="e")
     email_type = ttk.Combobox(emailFrame, values=email_types, state="readonly")
     email_type.grid(row=r, column=1, sticky="ew", padx=(0, 15))
+    email_type.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
+    combo_boxes.append(email_type)
 
     # Increment email count
     emails += 1
 
     # Move button down
     email_add_button.grid(row=r+1, columnspan=2, sticky="ew", pady=5, padx=(5,15))
+
+
 email_add_button.config(command=add_email)
 
 # Section End Separator
@@ -97,7 +103,7 @@ for i in range(30, 50):
 #####################
 
 ## Combobox Behaviour
-boxes = [email_type]
+boxes = combo_boxes
 
 def block_and_forward_scroll(event):
     vCard.event_generate("<MouseWheel>", delta=event.delta)
