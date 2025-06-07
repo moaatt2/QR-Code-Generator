@@ -47,12 +47,12 @@ emailFrame.columnconfigure(1, weight=1)
 
 # Email
 tkinter.Label(emailFrame, text="Email Address:").grid(row=1, sticky="e")
-tkinter.Entry(emailFrame).grid(row=1, column=1, sticky="ew", padx=(0, 15))
+tkinter.Entry(emailFrame).grid(row=1, column=1, sticky="ew", pady=5, padx=(0, 15))
 
 # Email Type
 tkinter.Label(emailFrame, text="Email Type:").grid(row=2, sticky="e")
 email_type = ttk.Combobox(emailFrame, values=email_types, state="readonly")
-email_type.grid(row=2, column=1, sticky="ew", padx=(0, 15))
+email_type.grid(row=2, column=1, sticky="ew", pady=5, padx=(0, 15))
 
 
 emails = 1
@@ -66,13 +66,13 @@ def add_email():
     # Add email field
     r = 1 + 2*emails
     tkinter.Label(emailFrame, text="Email Address:").grid(row=r, sticky="e")
-    tkinter.Entry(emailFrame).grid(row=r, column=1, sticky="ew", padx=(0, 15))
+    tkinter.Entry(emailFrame).grid(row=r, column=1, sticky="ew", pady=5, padx=(0, 15))
 
     # Add email type field
     r += 1
     tkinter.Label(emailFrame, text="Email Type:").grid(row=r, sticky="e")
     email_type = ttk.Combobox(emailFrame, values=email_types, state="readonly")
-    email_type.grid(row=r, column=1, sticky="ew", padx=(0, 15))
+    email_type.grid(row=r, column=1, sticky="ew", pady=5, padx=(0, 15))
     email_type.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
     combo_boxes.append(email_type)
 
@@ -81,7 +81,6 @@ def add_email():
 
     # Move button down
     email_add_button.grid(row=r+1, columnspan=2, sticky="ew", pady=5, padx=(5,15))
-
 
 email_add_button.config(command=add_email)
 
