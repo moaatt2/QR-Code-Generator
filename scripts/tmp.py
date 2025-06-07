@@ -7,11 +7,36 @@ from ttkbootstrap.scrolled import ScrolledFrame
 ### Settings ###
 ################
 
+combo_boxes = list()
+
+emails = 1
 email_types = [
     "",
     "Work",
     "Home",
 ]
+
+
+########################
+### Helper Functions ###
+########################
+
+# Blocks mousewheel event and forwards to scrolled frame for specified element
+def block_and_forward_scroll(event):
+    vCard.event_generate("<MouseWheel>", delta=event.delta)
+    return "break"
+
+
+# When a combobox is selected this avoids the selection highlight
+# Also refreshes the blocking/forwarding of mousewheel events
+def box_updated(event):
+    # Clear selection to avoid
+    event.widget.selection_clear()
+
+    # Allow scrolling but block updates
+    for box in combo_boxes:
+        box.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
+
 
 #####################
 ### Tkinter Setup ###
@@ -53,11 +78,11 @@ tkinter.Entry(emailFrame).grid(row=1, column=1, sticky="ew", pady=5, padx=(0, 15
 tkinter.Label(emailFrame, text="Email Type:").grid(row=2, sticky="e")
 email_type = ttk.Combobox(emailFrame, values=email_types, state="readonly")
 email_type.grid(row=2, column=1, sticky="ew", pady=5, padx=(0, 15))
-
-
-emails = 1
-combo_boxes = list()
 combo_boxes.append(email_type)
+email_type.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
+email_type.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
+
+# Email add button with function
 email_add_button = ttk.Button(emailFrame, text="Add Add Additional Email")
 email_add_button.grid(row=3, columnspan=2, sticky="ew", pady=5, padx=(5,15))
 def add_email():
@@ -73,15 +98,15 @@ def add_email():
     tkinter.Label(emailFrame, text="Email Type:").grid(row=r, sticky="e")
     email_type = ttk.Combobox(emailFrame, values=email_types, state="readonly")
     email_type.grid(row=r, column=1, sticky="ew", pady=5, padx=(0, 15))
-    email_type.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
     combo_boxes.append(email_type)
+    email_type.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
+    email_type.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
 
     # Increment email count
     emails += 1
 
     # Move button down
     email_add_button.grid(row=r+1, columnspan=2, sticky="ew", pady=5, padx=(5,15))
-
 email_add_button.config(command=add_email)
 
 # Section End Separator
@@ -95,31 +120,5 @@ ttk.Separator(vCard, orient="horizontal").grid(row=29, columnspan=2, sticky="ew"
 for i in range(30, 50):
     tkinter.Label(vCard, text="Suffix:").grid(row=i, sticky="e")
     tkinter.Entry(vCard).grid(row=i, column=1, sticky="ew", padx=(0, 15))
-
-
-#####################
-### Event Binding ###
-#####################
-
-## Combobox Behaviour
-boxes = combo_boxes
-
-def block_and_forward_scroll(event):
-    vCard.event_generate("<MouseWheel>", delta=event.delta)
-    return "break"
-
-
-def box_updated(event):
-    # Clear selection to avoid
-    event.widget.selection_clear()
-
-    # Allow scrolling but block updates
-    for box in boxes:
-        box.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
-
-
-for box in boxes:
-    box.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
-    box.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
 
 window.mainloop()
