@@ -140,12 +140,35 @@ def add_email():
     button_frame.grid(row=r+1, columnspan=2, sticky="ew", pady=5, padx=(5,15))
 
 
+# Function to delete the last email field
+def del_email():
+    global emails
+
+    # Remove last email field
+    for widget in email_layout[emails]:
+        widget.grid_forget()
+        widget.destroy()
+
+    # Update list of combo boxes
+    combo_boxes.remove(email_layout[emails][3])
+
+    # Remove items from email layout
+    del email_layout[emails]
+
+    # Decrement Email Count
+    emails -= 1
+
+    # Move Button up
+    r = 1 + 2*emails
+    button_frame.grid(row=r, columnspan=2, sticky="ew", pady=5, padx=(5,15))
+
+
 # Add Email Button
 add_email_button = ttk.Button(button_frame, text="Add Email", command=add_email)
 add_email_button.pack(side="left", expand=True, fill="x", padx=5)
 
 # Del Email Button
-del_email_button = ttk.Button(button_frame, text="Remove Email")
+del_email_button = ttk.Button(button_frame, text="Remove Email", command=del_email)
 del_email_button.pack(side="right", expand=True, fill="x", padx=5)
 
 # Section End Separator
