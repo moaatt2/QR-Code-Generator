@@ -65,7 +65,7 @@ label = tkinter.Label(vCard, text="Leave this blank if you don't want to include
 label.config(font=("Arial", 7))
 label.grid(row=26, columnspan=2, pady=(0,5), sticky="w")
 
-
+# Add a frame to hold the email addresses, this way the expansion is easier to manage as just the frame needs moved.
 emailFrame = ttk.Frame(vCard)
 emailFrame.grid(row=27, columnspan=2, sticky="ew")
 emailFrame.columnconfigure(1, weight=1)
@@ -82,9 +82,13 @@ combo_boxes.append(email_type)
 email_type.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
 email_type.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
 
-# Email add button with function
-email_add_button = ttk.Button(emailFrame, text="Add Add Additional Email")
-email_add_button.grid(row=3, columnspan=2, sticky="ew", pady=5, padx=(5,15))
+
+# Add Frame to hold add/remove buttons so they can each take half the space
+button_frame = ttk.Frame(emailFrame)
+button_frame.grid(row=4, columnspan=2, sticky="ew", pady=5, padx=(0,10))
+
+
+# Function to add email field on request
 def add_email():
     global emails
 
@@ -106,8 +110,16 @@ def add_email():
     emails += 1
 
     # Move button down
-    email_add_button.grid(row=r+1, columnspan=2, sticky="ew", pady=5, padx=(5,15))
-email_add_button.config(command=add_email)
+    button_frame.grid(row=r+1, columnspan=2, sticky="ew", pady=5, padx=(5,15))
+
+
+# Add Email Button
+add_email_button = ttk.Button(button_frame, text="Add Email", command=add_email)
+add_email_button.pack(side="left", expand=True, fill="x", padx=5)
+
+# Del Email Button
+del_email_button = ttk.Button(button_frame, text="Remove Email")
+del_email_button.pack(side="right", expand=True, fill="x", padx=5)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=29, columnspan=2, sticky="ew", pady=5)
