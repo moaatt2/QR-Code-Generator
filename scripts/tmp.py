@@ -15,6 +15,7 @@ email_types = [
     "Work",
     "Home",
 ]
+email_layout = {}
 
 
 ########################
@@ -71,13 +72,26 @@ emailFrame.grid(row=27, columnspan=2, sticky="ew")
 emailFrame.columnconfigure(1, weight=1)
 
 # Email
-tkinter.Label(emailFrame, text="Email Address:").grid(row=1, sticky="e")
-tkinter.Entry(emailFrame).grid(row=1, column=1, sticky="ew", pady=5, padx=(0, 15))
+address_label = tkinter.Label(emailFrame, text="Email Address:")
+address_label.grid(row=1, sticky="e")
+address_entry = tkinter.Entry(emailFrame)
+address_entry.grid(row=1, column=1, sticky="ew", pady=5, padx=(0, 15))
 
 # Email Type
-tkinter.Label(emailFrame, text="Email Type:").grid(row=2, sticky="e")
+type_label = tkinter.Label(emailFrame, text="Email Type:")
+type_label.grid(row=2, sticky="e")
 email_type = ttk.Combobox(emailFrame, values=email_types, state="readonly")
 email_type.grid(row=2, column=1, sticky="ew", pady=5, padx=(0, 15))
+
+# Add widgets to dict
+email_layout[emails] = [
+    address_label,
+    address_entry,
+    type_label,
+    email_type,
+]
+
+# Bind email type to forward scroll and not highlight selection
 combo_boxes.append(email_type)
 email_type.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
 email_type.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
@@ -94,20 +108,33 @@ def add_email():
 
     # Add email field
     r = 1 + 2*emails
-    tkinter.Label(emailFrame, text="Email Address:").grid(row=r, sticky="e")
-    tkinter.Entry(emailFrame).grid(row=r, column=1, sticky="ew", pady=5, padx=(0, 15))
+    address_label = tkinter.Label(emailFrame, text="Email Address:")
+    address_label.grid(row=r, sticky="e")
+    address_entry = tkinter.Entry(emailFrame)
+    address_entry.grid(row=r, column=1, sticky="ew", pady=5, padx=(0, 15))
 
     # Add email type field
     r += 1
-    tkinter.Label(emailFrame, text="Email Type:").grid(row=r, sticky="e")
+    type_label = tkinter.Label(emailFrame, text="Email Type:")
+    type_label.grid(row=r, sticky="e")
     email_type = ttk.Combobox(emailFrame, values=email_types, state="readonly")
     email_type.grid(row=r, column=1, sticky="ew", pady=5, padx=(0, 15))
-    combo_boxes.append(email_type)
-    email_type.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
-    email_type.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
 
     # Increment email count
     emails += 1
+
+    # Add widgets to dict
+    email_layout[emails] = [
+        address_label,
+        address_entry,
+        type_label,
+        email_type,
+    ]
+
+    # Update list of combo boxes and bind events
+    combo_boxes.append(email_type)
+    email_type.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
+    email_type.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
 
     # Move button down
     button_frame.grid(row=r+1, columnspan=2, sticky="ew", pady=5, padx=(5,15))
