@@ -139,6 +139,10 @@ def add_email():
     # Move button down
     button_frame.grid(row=r+1, columnspan=2, sticky="ew", pady=5, padx=(5,15))
 
+    # Enable delete button if more than one email field exists
+    if emails > 1:
+        del_email_button.config(state=tkinter.NORMAL)
+
 
 # Function to delete the last email field
 def del_email():
@@ -162,6 +166,10 @@ def del_email():
     r = 1 + 2*emails
     button_frame.grid(row=r, columnspan=2, sticky="ew", pady=5, padx=(5,15))
 
+    # Disable delete button if only one email left
+    if emails == 1:
+        del_email_button.config(state=tkinter.DISABLED)
+
 
 # Add Email Button
 add_email_button = ttk.Button(button_frame, text="Add Email", command=add_email)
@@ -170,6 +178,7 @@ add_email_button.pack(side="left", expand=True, fill="x", padx=5)
 # Del Email Button
 del_email_button = ttk.Button(button_frame, text="Remove Email", command=del_email)
 del_email_button.pack(side="right", expand=True, fill="x", padx=5)
+del_email_button.config(state=tkinter.DISABLED)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=29, columnspan=2, sticky="ew", pady=5)
