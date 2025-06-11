@@ -45,6 +45,7 @@ vCard.pack(fill="both", expand=True)
 
 # Ensure that all scrolls of comboboxes in vCard dont affect the scrollbox
 vCard.bind_class("TCombobox", "<MouseWheel>", lambda e: block_and_forward_scroll(e))
+vCard.bind_class("Entry", "<MouseWheel>", lambda e: block_and_forward_scroll(e))
 
 ######################################
 ### Add Email Section to vCard Tab ###
