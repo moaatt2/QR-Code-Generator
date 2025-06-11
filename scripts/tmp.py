@@ -7,8 +7,6 @@ from ttkbootstrap.scrolled import ScrolledFrame
 ### Settings ###
 ################
 
-combo_boxes = list()
-
 emails = 1
 email_types = [
     "",
@@ -31,12 +29,7 @@ def block_and_forward_scroll(event):
 # When a combobox is selected this avoids the selection highlight
 # Also refreshes the blocking/forwarding of mousewheel events
 def box_updated(event):
-    # Clear selection to avoid
     event.widget.selection_clear()
-
-    # Allow scrolling but block updates
-    for box in combo_boxes:
-        box.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
 
 
 #####################
@@ -49,6 +42,9 @@ window.title("QR Code Generator")
 window.geometry("400x400")
 vCard = ScrolledFrame(window, autohide=False)
 vCard.pack(fill="both", expand=True)
+
+# Ensure that all scrolls of comboboxes in vCard dont affect the scrollbox
+vCard.bind_class("TCombobox", "<MouseWheel>", lambda e: block_and_forward_scroll(e))
 
 ######################################
 ### Add Email Section to vCard Tab ###
@@ -91,10 +87,8 @@ email_layout[emails] = [
     email_type,
 ]
 
-# Bind email type to forward scroll and not highlight selection
-combo_boxes.append(email_type)
+# Bind email type to not highlight selection
 email_type.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
-email_type.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
 
 
 # Add Frame to hold add/remove buttons so they can each take half the space
@@ -131,10 +125,8 @@ def add_email():
         email_type,
     ]
 
-    # Update list of combo boxes and bind events
-    combo_boxes.append(email_type)
+    # Bind selection event
     email_type.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
-    email_type.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
 
     # Move button down
     button_frame.grid(row=r+1, columnspan=2, sticky="ew", pady=5, padx=(5,15))
@@ -152,9 +144,6 @@ def del_email():
     for widget in email_layout[emails]:
         widget.grid_forget()
         widget.destroy()
-
-    # Update list of combo boxes
-    combo_boxes.remove(email_layout[emails][3])
 
     # Remove items from email layout
     del email_layout[emails]
@@ -188,7 +177,7 @@ ttk.Separator(vCard, orient="horizontal").grid(row=29, columnspan=2, sticky="ew"
 ### Add Filler To Ensure Scrolling ###
 ######################################
 
-for i in range(30, 50):
+for i in range(50, 70):
     tkinter.Label(vCard, text="Suffix:").grid(row=i, sticky="e")
     tkinter.Entry(vCard).grid(row=i, column=1, sticky="ew", padx=(0, 15))
 
