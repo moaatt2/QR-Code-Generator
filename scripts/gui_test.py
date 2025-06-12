@@ -218,7 +218,7 @@ type_label.grid(row=2, sticky="e", pady=5)
 phone_type = ttk.Combobox(phoneFrame, values=phone_types, state="readonly")
 phone_type.grid(row=2, column=1, sticky="ew", pady=5, padx=(0, 15))
 
-# Bind email type to not highlight selection
+# Bind phone type to not highlight selection
 phone_type.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
 
 # Add widgets to layout
@@ -300,11 +300,11 @@ def del_phone():
         del_phone_button.config(state=tkinter.DISABLED)
 
 
-# Add Email Button
+# Add Phone Button
 add_phone_button = ttk.Button(phone_button_frame, text="Add Number", command=add_phone)
 add_phone_button.pack(side="left", expand=True, fill="x", padx=(0,5))
 
-# Del Email Button
+# Del Phone Button
 del_phone_button = ttk.Button(phone_button_frame, text="Remove Number", command=del_phone)
 del_phone_button.pack(side="right", expand=True, fill="x", padx=(5,0))
 del_phone_button.config(state=tkinter.DISABLED)
