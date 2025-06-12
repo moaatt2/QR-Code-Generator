@@ -326,14 +326,114 @@ label = tkinter.Label(vCard, text="Leave this blank if you don't want to include
 label.config(font=("Arial", 7))
 label.grid(row=26, columnspan=2, pady=(0,5), sticky="w")
 
-# Email
-tkinter.Label(vCard, text="Email Address:").grid(row=27, sticky="e")
-tkinter.Entry(vCard).grid(row=27, column=1, sticky="ew", padx=(0, 15))
+# Add a frame to hold the email addresses & types
+# Makes the expansion is easier to manage since no movement is needed
+emailFrame = ttk.Frame(vCard)
+emailFrame.grid(row=27, columnspan=2, sticky="ew")
+emailFrame.columnconfigure(1, weight=1)
+
+# Email Address
+email_label = tkinter.Label(emailFrame, text="Email Address:")
+email_label.grid(row=1, sticky="e", pady=5)
+email_entry = tkinter.Entry(emailFrame)
+email_entry.grid(row=1, column=1, sticky="ew", pady=5, padx=(0, 15))
 
 # Email Type
-tkinter.Label(vCard, text="Email Type:").grid(row=28, sticky="e")
-email_type = ttk.Combobox(vCard, values=email_types, state="readonly")
-email_type.grid(row=28, column=1, sticky="ew", padx=(0, 15))
+type_label = tkinter.Label(emailFrame, text="Email Type:")
+type_label.grid(row=2, sticky="e", pady=5)
+email_type = ttk.Combobox(emailFrame, values=email_types, state="readonly")
+email_type.grid(row=2, column=1, sticky="ew", pady=5, padx=(0, 15))
+
+# Bind email type to not highlight selection
+email_type.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
+
+# Add widgets to layout
+email_layout[emails] = [
+    email_label,
+    email_entry,
+    type_label,
+    email_type,
+]
+
+
+# Add Frame to hold add/remove buttons so they can each take half the space
+email_button_frame = ttk.Frame(emailFrame)
+email_button_frame.grid(row=3, columnspan=2, sticky="ew", pady=5, padx=(5,15))
+
+
+# Function to add email field on request
+def add_email():
+    global emails
+
+    # Add email number field
+    r = 1 + 2*emails
+    email_label = tkinter.Label(emailFrame, text="Email Address:")
+    email_label.grid(row=r, sticky="e")
+    email_entry = tkinter.Entry(emailFrame)
+    email_entry.grid(row=r, column=1, sticky="ew", pady=5, padx=(0, 15))
+
+    # Add email type field
+    r += 1
+    type_label = tkinter.Label(emailFrame, text="Email Type:")
+    type_label.grid(row=r, sticky="e")
+    email_type = ttk.Combobox(emailFrame, values=email_types, state="readonly")
+    email_type.grid(row=r, column=1, sticky="ew", pady=5, padx=(0, 15))
+
+    # Bind event to combobox to avoid selection highlight
+    email_type.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
+
+    # Increment email count
+    emails += 1
+
+    # Add widgets to dict
+    email_layout[emails] = [
+        email_label,
+        email_entry,
+        type_label,
+        email_type,
+    ]
+
+    # Move button down
+    r += 1
+    email_button_frame.grid(row=r, columnspan=2, sticky="ew", pady=5, padx=(5,15))
+
+    # Enable delete button if more than one email number field exists
+    if emails > 1:
+        del_email_button.config(state=tkinter.NORMAL)
+
+
+# Function to delete the last email field
+def del_email():
+    global emails
+
+    # Remove last email field
+    for widget in email_layout[emails]:
+        widget.grid_forget()
+        widget.destroy()
+
+    # Remove items from email layout
+    del email_layout[emails]
+
+    # Decrement email count
+    emails -= 1
+
+    # Move Button frame up
+    r = 1 + 2*emails
+    email_button_frame.grid(row=r, columnspan=2, sticky="ew", pady=5, padx=(5,15))
+
+    # Disable delete button if only one email left
+    if emails == 1:
+        del_email_button.config(state=tkinter.DISABLED)
+
+
+# Add Email Button
+add_eamil_button = ttk.Button(email_button_frame, text="Add Email", command=add_email)
+add_eamil_button.pack(side="left", expand=True, fill="x", padx=(0,5))
+
+# Del Email Button
+del_email_button = ttk.Button(email_button_frame, text="Remove Email", command=del_email)
+del_email_button.pack(side="right", expand=True, fill="x", padx=(5,0))
+del_email_button.config(state=tkinter.DISABLED)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=29, columnspan=2, sticky="ew", pady=5)
