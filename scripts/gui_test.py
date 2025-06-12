@@ -12,6 +12,7 @@ from ttkbootstrap.scrolled import ScrolledFrame
 ### Settings ###
 ################
 
+phones = 1
 phone_types = [
     "",
     "text",
@@ -22,12 +23,31 @@ phone_types = [
     "pager",
     "textphone",
 ]
+phone_layout = {}
 
+emails = 1
 email_types = [
     "",
     "Work",
     "Home",
 ]
+email_layout = {}
+
+
+########################
+### Helper Functions ###
+########################
+
+# Blocks mousewheel event and forwards to scrolled frame for specified element
+def block_and_forward_scroll(event):
+    vCard.event_generate("<MouseWheel>", delta=event.delta)
+    return "break"
+
+
+# When a combobox is selected this avoids the selection highlight
+def box_updated(event):
+    event.widget.selection_clear()
+
 
 #####################
 ### Tkinter Setup ###
@@ -55,6 +75,10 @@ notebook = ttk.Notebook(notebook_frame)
 # Create Tabs to add to notebook
 raw_data = ttk.Frame(notebook)
 vCard = ScrolledFrame(notebook, autohide=False)
+
+# Ensure that all scrolls of combobox and entry feilds in vCard only affect the scrollbox
+vCard.bind_class("TCombobox", "<MouseWheel>", lambda e: block_and_forward_scroll(e))
+vCard.bind_class("Entry", "<MouseWheel>", lambda e: block_and_forward_scroll(e))
 
 # Add Content to Raw Data Tab
 label = tkinter.Label(raw_data, text="QR Code Data:")
@@ -176,14 +200,114 @@ label = tkinter.Label(vCard, text="Leave this blank if you don't want to include
 label.config(font=("Arial", 7))
 label.grid(row=21, columnspan=2, pady=(0,5), sticky="w")
 
+# Add a frame to hold the phone numbers & types
+# Makes the expansion is easier to manage since no movement is needed
+phoneFrame = ttk.Frame(vCard)
+phoneFrame.grid(row=22, columnspan=2, sticky="ew")
+phoneFrame.columnconfigure(1, weight=1)
+
 # Phone Number
-tkinter.Label(vCard, text="Phone Number:").grid(row=22, sticky="e")
-tkinter.Entry(vCard).grid(row=22, column=1, sticky="ew", padx=(0, 15))
+phone_label = tkinter.Label(phoneFrame, text="Phone Number:")
+phone_label.grid(row=1, sticky="e", pady=5)
+phone_entry = tkinter.Entry(phoneFrame)
+phone_entry.grid(row=1, column=1, sticky="ew", pady=5, padx=(0, 15))
 
 # Phone Type
-tkinter.Label(vCard, text="Phone Type:").grid(row=23, sticky="e")
-phone_type = ttk.Combobox(vCard, values=phone_types, state="readonly")
-phone_type.grid(row=23, column=1, sticky="ew", padx=(0, 15))
+type_label = tkinter.Label(phoneFrame, text="Phone Type:")
+type_label.grid(row=2, sticky="e", pady=5)
+phone_type = ttk.Combobox(phoneFrame, values=phone_types, state="readonly")
+phone_type.grid(row=2, column=1, sticky="ew", pady=5, padx=(0, 15))
+
+# Bind email type to not highlight selection
+phone_type.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
+
+# Add widgets to layout
+phone_layout[phones] = [
+    phone_label,
+    phone_entry,
+    type_label,
+    phone_type,
+]
+
+
+# Add Frame to hold add/remove buttons so they can each take half the space
+phone_button_frame = ttk.Frame(phoneFrame)
+phone_button_frame.grid(row=3, columnspan=2, sticky="ew", pady=5, padx=(5,15))
+
+
+# Function to add phone field on request
+def add_phone():
+    global phones
+
+    # Add phone number field
+    r = 1 + 2*phones
+    phone_label = tkinter.Label(phoneFrame, text="Phone Number:")
+    phone_label.grid(row=r, sticky="e")
+    phone_entry = tkinter.Entry(phoneFrame)
+    phone_entry.grid(row=r, column=1, sticky="ew", pady=5, padx=(0, 15))
+
+    # Add phone type field
+    r += 1
+    type_label = tkinter.Label(phoneFrame, text="Phone Type:")
+    type_label.grid(row=r, sticky="e")
+    phone_type = ttk.Combobox(phoneFrame, values=phone_types, state="readonly")
+    phone_type.grid(row=r, column=1, sticky="ew", pady=5, padx=(0, 15))
+
+    # Bind event to combobox to avoid selection highlight
+    phone_type.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
+
+    # Increment phone count
+    phones += 1
+
+    # Add widgets to dict
+    phone_layout[phones] = [
+        phone_label,
+        phone_entry,
+        type_label,
+        phone_type,
+    ]
+
+    # Move button down
+    r += 1
+    phone_button_frame.grid(row=r, columnspan=2, sticky="ew", pady=5, padx=(5,15))
+
+    # Enable delete button if more than one phone number field exists
+    if phones > 1:
+        del_phone_button.config(state=tkinter.NORMAL)
+
+
+# Function to delete the last phone field
+def del_phone():
+    global phones
+
+    # Remove last phone field
+    for widget in phone_layout[phones]:
+        widget.grid_forget()
+        widget.destroy()
+
+    # Remove items from phone layout
+    del phone_layout[phones]
+
+    # Decrement phone Count
+    phones -= 1
+
+    # Move Button frame up
+    r = 1 + 2*phones
+    phone_button_frame.grid(row=r, columnspan=2, sticky="ew", pady=5, padx=(5,15))
+
+    # Disable delete button if only one phone left
+    if phones == 1:
+        del_phone_button.config(state=tkinter.DISABLED)
+
+
+# Add Email Button
+add_phone_button = ttk.Button(phone_button_frame, text="Add Number", command=add_phone)
+add_phone_button.pack(side="left", expand=True, fill="x", padx=(0,5))
+
+# Del Email Button
+del_phone_button = ttk.Button(phone_button_frame, text="Remove Number", command=del_phone)
+del_phone_button.pack(side="right", expand=True, fill="x", padx=(5,0))
+del_phone_button.config(state=tkinter.DISABLED)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=24, columnspan=2, sticky="ew", pady=5)
@@ -264,29 +388,8 @@ notebook.add(vCard.container, text="vCard")
 notebook.pack(expand=True, fill="both")
 
 
-#####################
-### Event Binding ###
-#####################
-
-## Combobox Behaviour
-boxes = [phone_type, email_type]
-
-def block_and_forward_scroll(event):
-    vCard.event_generate("<MouseWheel>", delta=event.delta)
-    return "break"
-
-
-def box_updated(event):
-    # Clear selection to avoid
-    event.widget.selection_clear()
-
-    # Allow scrolling but block updates
-    for box in boxes:
-        box.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
-
-
-for box in boxes:
-    box.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
-    box.bind("<MouseWheel>", lambda e: block_and_forward_scroll(e))
+#######################
+### Start Main Loop ###
+#######################
 
 window.mainloop()
