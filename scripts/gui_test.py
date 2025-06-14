@@ -65,7 +65,6 @@ main_frame.pack(expand=True, fill="both")
 # Create sidebar
 sidebar = tkinter.Frame(main_frame, width=200)
 sidebar.pack(side="right", fill="y")
-ttk.Button(sidebar, text="Update QR Code").pack(side="bottom", fill="x")
 
 # Create notebook
 notebook_frame = tkinter.Frame(main_frame)
@@ -80,10 +79,24 @@ vCard = ScrolledFrame(notebook, autohide=False)
 vCard.bind_class("TCombobox", "<MouseWheel>", lambda e: block_and_forward_scroll(e))
 vCard.bind_class("Entry", "<MouseWheel>", lambda e: block_and_forward_scroll(e))
 
-# Add Content to Raw Data Tab
+
+#############################
+### Image Sidebar Content ###
+#############################
+
+ttk.Button(sidebar, text="Update QR Code").pack(side="bottom", fill="x", padx=5, pady=5)
+
+
+##########################
+### Raw Data Tab Setup ###
+##########################
+
+# Label
 label = tkinter.Label(raw_data, text="QR Code Data:")
 label.config(font=("Arial", 10, "bold"))
 label.pack(pady=5)
+
+# Text Entry
 tkinter.Text(raw_data).pack(padx=10, pady=5, fill="both", expand=True)
 
 
