@@ -6,6 +6,7 @@ import validators
 import tkinter
 import ttkbootstrap
 from tkinter import ttk
+from PIL import Image, ImageTk
 from ttkbootstrap.scrolled import ScrolledFrame
 
 ################
@@ -56,7 +57,7 @@ def box_updated(event):
 # Create primary frame to hold QR sidebar and content entry notebook
 window = tkinter.Tk()
 window.title("QR Code Generator")
-window.geometry("400x400")
+window.geometry("500x400")
 
 # Create Main Frame to hold notebook and sidebar
 main_frame = tkinter.Frame(window)
@@ -83,6 +84,17 @@ vCard.bind_class("Entry", "<MouseWheel>", lambda e: block_and_forward_scroll(e))
 #############################
 ### Image Sidebar Content ###
 #############################
+
+# Load & Resize Image
+# raw_img = Image.open("output/a.png")         # Small Image
+# raw_img = Image.open("output/test.png")      # Medium Image
+raw_img = Image.open("output/vCardTest.png") # Large image
+raw_img = raw_img.resize((200, 200), Image.LANCZOS)
+img = ImageTk.PhotoImage(raw_img)
+
+# Add image to sidebar
+panel = ttk.Label(sidebar, image=img)
+panel.pack(fill="both", expand="yes", padx=5, pady=5)
 
 ttk.Button(sidebar, text="Update QR Code").pack(side="bottom", fill="x", padx=5, pady=5)
 
