@@ -34,6 +34,7 @@ email_types = [
 ]
 email_layout = {}
 
+panel_image = None
 
 ########################
 ### Helper Functions ###
@@ -48,6 +49,22 @@ def block_and_forward_scroll(event):
 # When a combobox is selected this avoids the selection highlight
 def box_updated(event):
     event.widget.selection_clear()
+
+
+# Function to update the QR code based on user entered data.
+def update_qr_code():
+    # Use golbal variable to ensure that the image is stored outside the function's scope.
+    global panel_image
+
+    # Get data from raw data text box
+    data = raw_data_text.get("1.0", "end").strip()
+    # Create QR Code
+    raw_img = qrcode.make(data)
+    raw_img = raw_img.resize((200, 200), Image.LANCZOS)
+
+    # Update qr code in sidebar
+    panel_image = ImageTk.PhotoImage(raw_img)
+    panel.config(image=panel_image)
 
 
 #####################
@@ -86,9 +103,7 @@ vCard.bind_class("Entry", "<MouseWheel>", lambda e: block_and_forward_scroll(e))
 #############################
 
 # Load & Resize Image
-# raw_img = Image.open("output/a.png")         # Small Image
-# raw_img = Image.open("output/test.png")      # Medium Image
-raw_img = Image.open("output/vCardTest.png") # Large image
+raw_img = Image.open("assets/placeholder.png") # Large image
 raw_img = raw_img.resize((200, 200), Image.LANCZOS)
 img = ImageTk.PhotoImage(raw_img)
 
@@ -96,7 +111,7 @@ img = ImageTk.PhotoImage(raw_img)
 panel = ttk.Label(sidebar, image=img)
 panel.pack(fill="both", expand="yes", padx=5, pady=5)
 
-ttk.Button(sidebar, text="Update QR Code").pack(side="bottom", fill="x", padx=5, pady=5)
+ttk.Button(sidebar, text="Update QR Code", command=update_qr_code).pack(side="bottom", fill="x", padx=5, pady=5)
 
 
 ##########################
@@ -109,7 +124,8 @@ label.config(font=("Arial", 10, "bold"))
 label.pack(pady=5)
 
 # Text Entry
-tkinter.Text(raw_data).pack(padx=10, pady=5, fill="both", expand=True)
+raw_data_text = tkinter.Text(raw_data)
+raw_data_text.pack(padx=10, pady=5, fill="both", expand=True)
 
 
 #####################################
