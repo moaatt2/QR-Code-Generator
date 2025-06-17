@@ -6,6 +6,7 @@ import validators
 import tkinter
 import ttkbootstrap
 from tkinter import ttk
+from typing import Optional
 from PIL import Image, ImageTk
 from ttkbootstrap.scrolled import ScrolledFrame
 
@@ -51,13 +52,22 @@ def box_updated(event):
     event.widget.selection_clear()
 
 
-# Function to update the QR code based on user entered data.
-def update_qr_code():
+# Gets data from vCard tab and handles verification
+def get_verify_vCard_data() -> Optional[str]:
+    pass
+
+
+# Gets data from the raw text box
+#   Doesn't do any verification
+def get_raw_data() -> str:
+    return raw_data_text.get("1.0", "end").strip()
+
+
+# Takes data, creates qr code, and updates sidebar
+def generate_and_update_qr_code(data: str) -> None:
     # Use golbal variable to ensure that the image is stored outside the function's scope.
     global panel_image
 
-    # Get data from raw data text box
-    data = raw_data_text.get("1.0", "end").strip()
     # Create QR Code
     raw_img = qrcode.make(data)
     raw_img = raw_img.resize((200, 200), Image.LANCZOS)
@@ -65,6 +75,26 @@ def update_qr_code():
     # Update qr code in sidebar
     panel_image = ImageTk.PhotoImage(raw_img)
     panel.config(image=panel_image)
+
+
+# Function to update the QR code based on user entered data.
+def update_qr_code() -> None:
+
+    # Check which tab is active
+    active_tab = notebook.tab(notebook.select(), "text")
+
+    # Handle Raw Data Tab
+    if active_tab == "Raw Data":
+        data = get_raw_data()
+        generate_and_update_qr_code(data)
+
+    # Handle vCard Tab
+    elif active_tab == "vCard":
+        pass # TODO
+
+    # Handle unknown tab
+    else:
+        raise ValueError(f"Unknown active tab: {active_tab}")
 
 
 #####################
