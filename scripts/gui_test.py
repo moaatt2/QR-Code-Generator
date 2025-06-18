@@ -70,6 +70,11 @@ def get_verify_vCard_data() -> Optional[str]:
     suffix_clean      = suffix.get().strip()
     data += f"N:{last_name_clean};{first_name_clean};{middle_name_clean};{prefix_clean};{suffix_clean}\n"
 
+    # Notes
+    note_text = note_text_raw.get("1.0", "end").strip()
+    if note_text != "":
+        data += f"NOTE:{note_text}\n"
+
     # End vCard
     data += "END:VCARD"
 
@@ -110,6 +115,7 @@ def update_qr_code() -> None:
     # Handle vCard Tab
     elif active_tab == "vCard":
         data = get_verify_vCard_data()
+        print(data)
         generate_and_update_qr_code(data)
 
     # Handle unknown tab
@@ -237,7 +243,8 @@ label.config(font=("Arial", 7))
 label.grid(row=9, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Text Entry Section
-tkinter.Text(vCard, height=3).grid(row=10, columnspan=2, padx=(5, 15), pady=5)
+note_text_raw = tkinter.Text(vCard, height=3)
+note_text_raw.grid(row=10, columnspan=2, padx=(5, 15), pady=5)
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=11, columnspan=2, sticky="ew", pady=5)
