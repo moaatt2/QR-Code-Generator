@@ -54,7 +54,26 @@ def box_updated(event):
 
 # Gets data from vCard tab and handles verification
 def get_verify_vCard_data() -> Optional[str]:
-    pass
+    # Start version 4 vCard
+    data = "BEGIN:VCARD\n"
+    data += "VERSION:4.0\n"
+
+    # Formatted Name
+    display_name_clean = display_name.get().strip()
+    data += f"FN:{display_name_clean}\n"
+
+    # Full Name
+    prefix_clean      = prefix.get().strip()
+    first_name_clean  = first_name.get().strip()
+    middle_name_clean = middle_name.get().strip()
+    last_name_clean   = last_name.get().strip()
+    suffix_clean      = suffix.get().strip()
+    data += f"N:{last_name_clean};{first_name_clean};{middle_name_clean};{prefix_clean};{suffix_clean}\n"
+
+    # End vCard
+    data += "END:VCARD"
+
+    return data
 
 
 # Gets data from the raw text box
@@ -90,7 +109,8 @@ def update_qr_code() -> None:
 
     # Handle vCard Tab
     elif active_tab == "vCard":
-        pass # TODO
+        data = get_verify_vCard_data()
+        generate_and_update_qr_code(data)
 
     # Handle unknown tab
     else:
@@ -171,27 +191,33 @@ label.grid(row=0, columnspan=2, pady=5, sticky="ew")
 
 # Displayname
 tkinter.Label(vCard, text="Display Name:").grid(row=1, sticky="e")
-tkinter.Entry(vCard).grid(row=1, column=1, sticky="ew", padx=(0, 15))
+display_name = tkinter.Entry(vCard)
+display_name.grid(row=1, column=1, sticky="ew", padx=(0, 15))
 
 # Prefix
 tkinter.Label(vCard, text="Prefix:").grid(row=2, sticky="e")
-tkinter.Entry(vCard).grid(row=2, column=1, sticky="ew", padx=(0, 15))
+prefix = tkinter.Entry(vCard)
+prefix.grid(row=2, column=1, sticky="ew", padx=(0, 15))
 
 # First Name
 tkinter.Label(vCard, text="First Name:").grid(row=3, sticky="e")
-tkinter.Entry(vCard).grid(row=3, column=1, sticky="ew", padx=(0, 15))
+first_name = tkinter.Entry(vCard)
+first_name.grid(row=3, column=1, sticky="ew", padx=(0, 15))
 
 # Middle Name
 tkinter.Label(vCard, text="Middle Name:").grid(row=4, sticky="e")
-tkinter.Entry(vCard).grid(row=4, column=1, sticky="ew", padx=(0, 15))
+middle_name = tkinter.Entry(vCard)
+middle_name.grid(row=4, column=1, sticky="ew", padx=(0, 15))
 
 # Last Name
 tkinter.Label(vCard, text="Last Name:").grid(row=5, sticky="e")
-tkinter.Entry(vCard).grid(row=5, column=1, sticky="ew", padx=(0, 15))
+last_name = tkinter.Entry(vCard)
+last_name.grid(row=5, column=1, sticky="ew", padx=(0, 15))
 
 # Suffix
 tkinter.Label(vCard, text="Suffix:").grid(row=6, sticky="e")
-tkinter.Entry(vCard).grid(row=6, column=1, sticky="ew", padx=(0, 15))
+suffix = tkinter.Entry(vCard)
+suffix.grid(row=6, column=1, sticky="ew", padx=(0, 15))
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=7, columnspan=2, sticky="ew", pady=5)
