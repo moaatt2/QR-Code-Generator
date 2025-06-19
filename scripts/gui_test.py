@@ -80,6 +80,19 @@ def get_verify_vCard_data() -> Optional[str]:
     if sound_link_text != "":
         data += f"SOUND:{sound_link_text}\n"
 
+    # Source Link
+    source_link_text = source_link_entry.get().strip()
+    if source_link_text != "":
+        data += f"SOURCE:{source_link_text}\n"
+
+    # Phone numbers
+    for i in phone_layout:
+        number_text = phone_layout[i][1].get().strip()
+        type_text = phone_layout[i][3].get().strip()
+
+        if number_text != "":
+            data += f"TEL;TYPE={type_text}:{number_text}\n"
+
     # End vCard
     data += "END:VCARD"
     print()
@@ -292,7 +305,8 @@ label.config(font=("Arial", 7))
 label.grid(row=17, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Text Entry Section
-tkinter.Entry(vCard).grid(row=18, columnspan=2, sticky="ew", pady=5, padx=(5, 15))
+source_link_entry = tkinter.Entry(vCard)
+source_link_entry.grid(row=18, columnspan=2, sticky="ew", pady=5, padx=(5, 15))
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=19, columnspan=2, sticky="ew", pady=5)
