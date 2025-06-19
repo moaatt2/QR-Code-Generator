@@ -75,8 +75,14 @@ def get_verify_vCard_data() -> Optional[str]:
     if note_text != "":
         data += f"NOTE:{note_text}\n"
 
+    # Sound Link
+    sound_link_text = sound_link_entry.get().strip()
+    if sound_link_text != "":
+        data += f"SOUND:{sound_link_text}\n"
+
     # End vCard
     data += "END:VCARD"
+    print()
 
     return data
 
@@ -264,7 +270,8 @@ label.config(font=("Arial", 7))
 label.grid(row=13, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Text Entry Section
-tkinter.Entry(vCard).grid(row=14, columnspan=2, sticky="ew", pady=5, padx=(5, 15))
+sound_link_entry = tkinter.Entry(vCard)
+sound_link_entry.grid(row=14, columnspan=2, sticky="ew", pady=5, padx=(5, 15))
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=15, columnspan=2, sticky="ew", pady=5)
