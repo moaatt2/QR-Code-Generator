@@ -104,6 +104,11 @@ def get_verify_vCard_data() -> Optional[str]:
             else:
                 data += f"EMAIL:{email_text}\n"
 
+    # Calendar URI
+    calendar_link_text = calendar_link_raw.get().strip()
+    if calendar_link_text != "":
+        data += f"CALURI:{calendar_link_text}\n"
+
     # End vCard
     data += "END:VCARD"
     print()
@@ -589,7 +594,8 @@ label.config(font=("Arial", 7))
 label.grid(row=31, columnspan=2, pady=(0,5), sticky="w")
 
 # Add Text Entry Section
-tkinter.Entry(vCard).grid(row=32, columnspan=2, sticky="ew", pady=5, padx=(5, 15))
+calendar_link_raw = tkinter.Entry(vCard)
+calendar_link_raw.grid(row=32, columnspan=2, sticky="ew", pady=5, padx=(5, 15))
 
 # Section End Separator
 ttk.Separator(vCard, orient="horizontal").grid(row=33, columnspan=2, sticky="ew", pady=5)
