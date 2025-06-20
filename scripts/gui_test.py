@@ -93,6 +93,17 @@ def get_verify_vCard_data() -> Optional[str]:
         if number_text != "":
             data += f"TEL;TYPE={type_text}:{number_text}\n"
 
+    # Emails
+    for i in email_layout:
+        email_text = email_layout[i][1].get().strip()
+        type_text = email_layout[i][3].get().strip()
+
+        if email_text != "":
+            if type_text != "":
+                data += f"EMAIL;TYPE={type_text}:{email_text}\n"
+            else:
+                data += f"EMAIL:{email_text}\n"
+
     # End vCard
     data += "END:VCARD"
     print()
