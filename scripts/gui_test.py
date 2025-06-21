@@ -109,6 +109,12 @@ def get_verify_vCard_data() -> Optional[str]:
     if calendar_link_text != "":
         data += f"CALURI:{calendar_link_text}\n"
 
+    # Birthday
+    birthday_text = date_entry.entry.get().strip()
+    print(birthday_text)
+    year, month, day = birthday_text.split("-")
+    data += f"BDAY:{year}{month}{day}\n"
+
     # End vCard
     data += "END:VCARD"
     print()
