@@ -207,8 +207,20 @@ img = ImageTk.PhotoImage(raw_img)
 panel = ttk.Label(sidebar, image=img)
 panel.pack(fill="both", expand="yes", padx=5, pady=5)
 
+# Button to update QR Code
 ttk.Button(sidebar, text="Update QR Code", command=update_qr_code).pack(side="bottom", fill="x", padx=5, pady=5)
 
+# Section End Separator
+ttk.Separator(sidebar, orient="horizontal").pack(side="bottom", fill="x", pady=5)
+
+# Correction Level 
+correction_level = ttk.Combobox(sidebar, values=list(), state="readonly")
+correction_level.pack(side="bottom", fill="x", padx=5, pady=(0,5))
+
+# Correction Level Label
+correction_label = tkinter.Label(sidebar, text="Correction Level:")
+correction_label.config(font=("Arial", 10, "bold"))
+correction_label.pack(side="bottom", padx=5)
 
 ##########################
 ### Raw Data Tab Setup ###
