@@ -111,7 +111,6 @@ def get_verify_vCard_data() -> Optional[str]:
 
     # Birthday
     birthday_text = date_entry.entry.get().strip()
-    print(birthday_text)
     year, month, day = birthday_text.split("-")
     data += f"BDAY:{year}{month}{day}\n"
 
