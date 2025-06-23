@@ -78,6 +78,16 @@ def get_verify_vCard_data() -> Optional[str]:
     # Sound Link
     sound_link_text = sound_link_entry.get().strip()
     if sound_link_text != "":
+
+        # Clean up url
+        if "://" not in sound_link_text:
+            sound_link_text = "https://" + sound_link_text
+        
+        if validators.url(sound_link_text):
+            print(f"Valid Sound Link: {sound_link_text}")
+        else:
+            print(f"Invalid Sound Link: {sound_link_text}")
+
         data += f"SOUND:{sound_link_text}\n"
 
     # Source Link
