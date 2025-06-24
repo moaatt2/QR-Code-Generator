@@ -83,10 +83,11 @@ def get_verify_vCard_data() -> Optional[str]:
         if "://" not in sound_link_text:
             sound_link_text = "https://" + sound_link_text
         
-        if validators.url(sound_link_text):
-            print(f"Valid Sound Link: {sound_link_text}")
-        else:
+        if not validators.url(sound_link_text):
             print(f"Invalid Sound Link: {sound_link_text}")
+            return None
+        else:
+            print(f"Valid Sound Link: {sound_link_text}")
 
         data += f"SOUND:{sound_link_text}\n"
 
@@ -165,8 +166,12 @@ def update_qr_code() -> None:
     # Handle vCard Tab
     elif active_tab == "vCard":
         data = get_verify_vCard_data()
-        print(data)
-        generate_and_update_qr_code(data)
+        if data:
+            print(data)
+            generate_and_update_qr_code(data)
+        else:
+            print("Invalid vCard data, QR Code not updated.")
+
 
     # Handle unknown tab
     else:
