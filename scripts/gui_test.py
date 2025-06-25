@@ -1,5 +1,6 @@
 import os
 import re
+import tkinter.messagebox
 import qrcode
 import datetime as dt
 import validators
@@ -85,6 +86,7 @@ def get_verify_vCard_data() -> Optional[str]:
         
         if not validators.url(sound_link_text):
             print(f"Invalid Sound Link: {sound_link_text}")
+            tkinter.messagebox.showerror("Invalid Sound Link", f"The Sound Link '{sound_link_text}' is not a valid URL.\nPlease enter a valid URL.")
             return None
         else:
             print(f"Valid Sound Link: {sound_link_text}")
