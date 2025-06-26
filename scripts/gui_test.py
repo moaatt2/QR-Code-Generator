@@ -84,13 +84,12 @@ def get_verify_vCard_data() -> Optional[str]:
         if "://" not in sound_link_text:
             sound_link_text = "https://" + sound_link_text
         
+        # Validate url and return none if it is invalid
         if not validators.url(sound_link_text):
-            print(f"Invalid Sound Link: {sound_link_text}")
             tkinter.messagebox.showerror("Invalid Sound Link", f"The Sound Link '{sound_link_text}' is not a valid URL.\nPlease enter a valid URL.")
             return None
-        else:
-            print(f"Valid Sound Link: {sound_link_text}")
 
+        # Add sound link to data if exists and valid
         data += f"SOUND:{sound_link_text}\n"
 
     # Source Link
@@ -171,8 +170,6 @@ def update_qr_code() -> None:
         if data:
             print(data)
             generate_and_update_qr_code(data)
-        else:
-            print("Invalid vCard data, QR Code not updated.")
 
 
     # Handle unknown tab
