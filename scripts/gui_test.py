@@ -95,6 +95,16 @@ def get_verify_vCard_data() -> Optional[str]:
     # Source Link
     source_link_text = source_link_entry.get().strip()
     if source_link_text != "":
+        
+        # Clean url
+        if "://" not in source_link_text:
+            source_link_text = "https://" + source_link_text
+        
+        # Validate url and return none if it is invalid
+        if not validators.url(source_link_text):
+            tkinter.messagebox.showerror("Invalid Source Link", f"The Source Link '{source_link_text}' is not a valid URL.\nPlease enter a valid URL.")
+            return None
+
         data += f"SOURCE:{source_link_text}\n"
 
     # Phone numbers
