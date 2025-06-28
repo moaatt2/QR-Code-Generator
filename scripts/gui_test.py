@@ -108,12 +108,23 @@ def get_verify_vCard_data() -> Optional[str]:
         data += f"SOURCE:{source_link_text}\n"
 
     # Phone numbers
-    for i in phone_layout:
+    for j, i in enumerate(phone_layout):
+
+        # Get phone number and type
         number_text = phone_layout[i][1].get().strip()
         type_text = phone_layout[i][3].get().strip()
 
+        # Confirm number has been entered
         if number_text != "":
-            data += f"TEL;TYPE={type_text}:{number_text}\n"
+
+            # Vailidate phone number
+            matches = re.match(r"^\(\d{3}\) \d{3}-\d{4}$", number_text)
+            if bool(matches):
+                data += f"TEL;TYPE={type_text}:{number_text}\n"
+            
+            else:
+                tkinter.messagebox.showerror("Invalid Phone Number", f"Phone Number {j+1} '{number_text}' is not in the correct format.\nPlease enter a phone number in the format (XXX) XXX-XXXX.")
+                return None
 
     # Emails
     for i in email_layout:
