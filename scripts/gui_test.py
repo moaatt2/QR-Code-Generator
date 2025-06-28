@@ -378,7 +378,7 @@ label.config(font=("Arial", 11, "bold"))
 label.grid(row=20, columnspan=2, pady=(5,0), sticky="ew")
 
 # Add note about leaving blank
-label = tkinter.Label(vCard, text="Leave this blank if you don't want to include a Phone Number.")
+label = tkinter.Label(vCard, justify="left", text="Phone Numbers must be in (XXX) XXX-XXXX format.\nLeave this blank if you don't want to include a Phone Number.")
 label.config(font=("Arial", 7))
 label.grid(row=21, columnspan=2, pady=(0,5), sticky="w")
 
