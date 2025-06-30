@@ -123,7 +123,7 @@ def get_verify_vCard_data() -> Optional[str]:
                 data += f"TEL;TYPE={type_text}:{number_text}\n"
             
             else:
-                tkinter.messagebox.showerror("Invalid Phone Number", f"Phone Number {j+1} '{number_text}' is not in the correct format.\nPlease enter a phone number in the format (XXX) XXX-XXXX.")
+                tkinter.messagebox.showerror("Invalid Phone Number", f"Phone Number {j+1}: '{number_text}' is not in the correct format.\nPlease enter a phone number in the format (XXX) XXX-XXXX.")
                 return None
 
     # Emails
@@ -145,7 +145,7 @@ def get_verify_vCard_data() -> Optional[str]:
             
             # If email is invalid, show error and return None
             else:
-                tkinter.messagebox.showerror("Invalid Email", f"Email {j+1} '{email_text}' is not a valid email address.\nPlease enter a valid email address.")
+                tkinter.messagebox.showerror("Invalid Email", f"Email {j+1}: '{email_text}' is not a valid email address.\nPlease enter a valid email address.")
                 return None
 
     # Calendar URI
