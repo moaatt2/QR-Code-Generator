@@ -127,15 +127,26 @@ def get_verify_vCard_data() -> Optional[str]:
                 return None
 
     # Emails
-    for i in email_layout:
+    for j, i in enumerate(email_layout):
+
+        # Get email address and type
         email_text = email_layout[i][1].get().strip()
         type_text = email_layout[i][3].get().strip()
 
+        # Verify that email is not empty
         if email_text != "":
-            if type_text != "":
-                data += f"EMAIL;TYPE={type_text}:{email_text}\n"
+
+            # Validate email and continue if valid
+            if validators.email(email_text):
+                if type_text != "":
+                    data += f"EMAIL;TYPE={type_text}:{email_text}\n"
+                else:
+                    data += f"EMAIL:{email_text}\n"
+            
+            # If email is invalid, show error and return None
             else:
-                data += f"EMAIL:{email_text}\n"
+                tkinter.messagebox.showerror("Invalid Email", f"Email {j+1} '{email_text}' is not a valid email address.\nPlease enter a valid email address.")
+                return None
 
     # Calendar URI
     calendar_link_text = calendar_link_raw.get().strip()
