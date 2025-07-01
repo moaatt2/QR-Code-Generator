@@ -269,6 +269,7 @@ ttk.Separator(sidebar, orient="horizontal").pack(side="bottom", fill="x", pady=5
 correction_level = ttk.Combobox(sidebar, values=list(correction_levels.keys()), state="readonly")
 correction_level.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
 correction_level.pack(side="bottom", fill="x", padx=5, pady=(0,5))
+correction_level.current(1)
 
 # Correction Level Label
 correction_label = tkinter.Label(sidebar, text="Correction Level:")
