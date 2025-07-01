@@ -36,6 +36,13 @@ email_types = [
 ]
 email_layout = {}
 
+correction_levels = {
+    "L -  7% of data can be restored": qrcode.constants.ERROR_CORRECT_L,
+    "M - 15% of data can be restored": qrcode.constants.ERROR_CORRECT_M,
+    "Q - 25% of data can be restored": qrcode.constants.ERROR_CORRECT_Q,
+    "H - 30% of data can be restored": qrcode.constants.ERROR_CORRECT_H,
+}
+
 panel_image = None
 
 ########################
@@ -203,7 +210,6 @@ def update_qr_code() -> None:
             print(data)
             generate_and_update_qr_code(data)
 
-
     # Handle unknown tab
     else:
         raise ValueError(f"Unknown active tab: {active_tab}")
@@ -260,7 +266,8 @@ ttk.Button(sidebar, text="Update QR Code", command=update_qr_code).pack(side="bo
 ttk.Separator(sidebar, orient="horizontal").pack(side="bottom", fill="x", pady=5)
 
 # Correction Level 
-correction_level = ttk.Combobox(sidebar, values=list(), state="readonly")
+correction_level = ttk.Combobox(sidebar, values=list(correction_levels.keys()), state="readonly")
+correction_level.bind("<<ComboboxSelected>>", lambda e: box_updated(e))
 correction_level.pack(side="bottom", fill="x", padx=5, pady=(0,5))
 
 # Correction Level Label
