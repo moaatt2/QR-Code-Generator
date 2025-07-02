@@ -184,7 +184,8 @@ def generate_and_update_qr_code(data: str) -> None:
     global panel_image
 
     # Create QR Code
-    raw_img = qrcode.make(data)
+    correction = correction_levels[correction_level.get()]
+    raw_img = qrcode.make(data, error_correction=correction)
     raw_img = raw_img.resize((200, 200), Image.LANCZOS)
 
     # Update qr code in sidebar
