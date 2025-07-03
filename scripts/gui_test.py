@@ -6,7 +6,7 @@ import datetime as dt
 import validators
 import tkinter
 import ttkbootstrap
-from tkinter import ttk
+from tkinter import ttk, filedialog
 from typing import Optional
 from PIL import Image, ImageTk
 from ttkbootstrap.scrolled import ScrolledFrame
@@ -218,7 +218,34 @@ def update_qr_code() -> None:
 
 # Function to save qr code
 def save_qr_code() -> None:
-    print("TODO: Save qr code")
+
+    # Initiate save file dialog to get file name and path
+    f = filedialog.asksaveasfilename(
+        title="Save QR Code",
+        defaultextension=".png",
+        filetypes=[("PNG files", "*.png"), ("All files", "*.*")],
+    )
+
+    # If a file was selected, proceed to save the QR code
+    if bool(f):
+
+        # Get data from application
+        data = None
+        active_tab = notebook.tab(notebook.select(), "text")
+        if active_tab == "Raw Data":
+            data = get_raw_data()
+        elif active_tab == "vCard":
+            data = get_verify_vCard_data()
+
+        # Generate QR code if data exists        
+        if data is not None:
+
+            # Create QR Code
+            correction = correction_levels[correction_level.get()]
+            code = qrcode.make(data, error_correction=correction)
+
+            # Save QR Code to file
+            code.save(f)
 
 
 #####################
