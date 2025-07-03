@@ -216,6 +216,11 @@ def update_qr_code() -> None:
         raise ValueError(f"Unknown active tab: {active_tab}")
 
 
+# Function to save qr code
+def save_qr_code() -> None:
+    print("TODO: Save qr code")
+
+
 #####################
 ### Tkinter Setup ###
 #####################
@@ -259,6 +264,9 @@ img = ImageTk.PhotoImage(raw_img)
 # Add image to sidebar
 panel = ttk.Label(sidebar, image=img)
 panel.pack(fill="both", expand="yes", padx=5, pady=5)
+
+# Button to save QR Code
+ttk.Button(sidebar, text="Save QR Code", command=save_qr_code).pack(side="bottom", fill="x", padx=5, pady=5)
 
 # Button to update QR Code
 ttk.Button(sidebar, text="Update QR Code", command=update_qr_code).pack(side="bottom", fill="x", padx=5, pady=5)
