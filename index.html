@@ -9,32 +9,43 @@
         <!-- Page Header -->
         <h1 style="text-align: center;">QR Code Generator</h1>
 
-        <!-- Tab box -->
-        <div class="tab">
-            <button class="tablinks" onclick="openTab(event, 'rawData')" id="defaultTab">Raw Data</button>
-            <button class="tablinks" onclick="openTab(event, 'vCard')">vCard</button>
-        </div>
+        <div class="flex-container">
+            <!-- Input Section -->
+            <div>
+                <!-- Tab Headers -->
+                <div class="tab">
+                    <button class="tablinks" onclick="openTab(event, 'rawData')" id="defaultTab">Raw Data</button>
+                    <button class="tablinks" onclick="openTab(event, 'vCard')">vCard</button>
+                </div>
 
-        <!-- Tab Content -->
-        <div>
-            <!-- Raw Data Tab -->
-            <div id="rawData" class="tabContent">
-                <h2>Raw Data</h2>
-                <p>Enter the data you want to encode in the QR code:</p>
+                <!-- Tab Content -->
+                <div>
+                    <!-- Raw Data Tab -->
+                    <div id="rawData" class="tabContent">
+                        <h2>Raw Data</h2>
+                        <p>Enter the data you want to encode in the QR code:</p>
+                    </div>
+
+                    <!-- vCard Tab -->
+                    <div id="vCard" class="tabContent">
+                        <h2>vCard</h2>
+                        <p>Enter the vCard details:</p>
+                    </div>
+                </div>
             </div>
 
-            <!-- vCard Tab -->
-            <div id="vCard" class="tabContent">
-                <h2>vCard</h2>
-                <p>Enter the vCard details:</p>
+            <!-- Image Section -->
+            <div>
+                <img id="qr_image_display" src="assets/images/placeholder.png">
             </div>
         </div>
-
-        <!-- Image Section -->
-        <div></div>
 
         <!-- Temporary in page styling -->
         <style>
+            .flex-container {
+            display: flex;
+            }
+
             /* Style the tab */
             .tab {
             overflow: hidden;
