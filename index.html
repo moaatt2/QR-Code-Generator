@@ -35,7 +35,7 @@
             </div>
 
             <!-- Image Section -->
-            <div>
+            <div class="flex-column">
                 <img id="qr_image_display" src="assets/images/placeholder.png">
                 <br>
                 <button>Update QR Code</button>
@@ -51,6 +51,13 @@
                 margin: 5px;
             }
 
+            /* Use flexbox to center and stretch buttons */
+            .flex-column {
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* Use flexbox to place image tab and data tab side by side */
             .flex-container {
                 display: flex;
                 flex-direction: row;
