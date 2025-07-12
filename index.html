@@ -11,7 +11,7 @@
 
         <div class="flex-container">
             <!-- Input Section -->
-            <div>
+            <div class="input-column">
                 <!-- Tab Headers -->
                 <div class="tab">
                     <button class="tablinks" onclick="openTab(event, 'rawData')" id="defaultTab">Raw Data</button>
@@ -35,7 +35,7 @@
             </div>
 
             <!-- Image Section -->
-            <div class="flex-column">
+            <div class="image-column">
                 <img id="qr_image_display" src="assets/images/placeholder.png">
                 <br>
                 <button>Update QR Code</button>
@@ -52,9 +52,16 @@
             }
 
             /* Use flexbox to center and stretch buttons */
-            .flex-column {
+            .image-column {
+                flex: 0 0 200px;
                 display: flex;
                 flex-direction: column;
+                align-self: center;
+            }
+
+            .input-column {
+                flex: 1 1 200px;
+                margin: 0 20px;
             }
 
             /* Use flexbox to place image tab and data tab side by side */
