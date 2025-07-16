@@ -69,8 +69,27 @@
                             <hr>
                         </div>
 
-                        <h3>Sound Link</h3>
-                        <hr>
+                        <!-- Sound Link -->
+                        <div>
+                            <h3>Sound Link</h3>
+                            Leave this blank if you don't want to add a sound link.
+                            <br>
+                            <br>
+                            <input class="form-input" type="text" id="soundLink" placeholder="Enter sound link">
+                            <hr>
+                        </div>
+
+                        <!-- Sound Link -->
+                        <div>
+                            <h3>Source Link</h3>
+                            This is for a link to where an up to date version of this vCard can be found.
+                            <br>
+                            Leave this blank if you don't want to add a source link.
+                            <br>
+                            <br>
+                            <input class="form-input" type="text" id="sourceLink" placeholder="Enter source link">
+                            <hr>
+                        </div>
 
                         <h3>Source Link</h3>
                         <hr>
@@ -81,11 +100,27 @@
                         <h3>Email Address</h3>
                         <hr>
 
-                        <h3>Calendar Link</h3>
-                        <hr>
+                        <!-- Calendar Link -->
+                        <div>
+                            <h3>Calendar Link</h3>
+                            This is for a link to an online calendar showing your availability for meetings or events.
+                            <br>
+                            Leave this blank if you don't want to add a calendar link.
+                            <br>
+                            <br>
+                            <input class="form-input" type="text" id="calendarLink" placeholder="Enter calendar link">
+                            <hr>
+                        </div>
 
-                        <h3>Birthday</h3>
-                        <hr>
+                        <!-- Birthday -->
+                        <div>
+                            <h3>Birthday</h3>
+                            Leave this blank if you don't want to add a birthday.
+                            <br>
+                            <br>
+                            <input class="form-input" type="date" id="birthday">
+                            <hr>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -116,6 +151,11 @@
             }
             .form-group input {
                 flex: 1;
+            }
+
+            /* Style the tab content */
+            .tabContent .form-input {
+                width: 100%;
             }
 
             /* Add margin and center button in  */
