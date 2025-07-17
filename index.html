@@ -94,7 +94,7 @@
                         <!-- Phone Number -->
                         <div>
                             <h3>Phone Number</h3>
-                                
+
                             <div class="form-group">
                                 <label for="phoneNumber">Phone Number:</label>
                                 <input type="tel" id="phoneNumber" placeholder="Enter phone number">
@@ -112,6 +112,12 @@
                                     <option value="textphone">textphone</option>
                                 </select>
                             </div>
+
+                            <div class="button-group">
+                                <button>Add Number</button>
+                                <button>Remove Number</button>
+                            </div>
+
                             <hr>
                         </div>
 
@@ -180,8 +186,17 @@
             }
 
             /* Add margin and center button in  */
-            button {
+            .image-column button {
                 margin: 5px;
+            }
+
+            /* Style vCard buttons */
+            .button-group {
+                display: flex;
+            }
+            #vCard button {
+                flex: 1;
+                margin: 10px 5px 0px 5px;
             }
 
             /* Style raw data textarea input */
