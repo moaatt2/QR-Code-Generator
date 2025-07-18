@@ -95,27 +95,33 @@
                         <div>
                             <h3>Phone Number</h3>
 
-                            <div class="form-group">
-                                <label for="phoneNumber">Phone Number:</label>
-                                <input type="tel" id="phoneNumber" placeholder="Enter phone number">
-                            </div>
-                            <div class="form-group">
-                                <label for="suffix">Suffix:</label>
-                                <select name="phoneType" id="phoneType">
-                                    <option value=""></option>
-                                    <option value="text">text</option>
-                                    <option value="voice">voice</option>
-                                    <option value="fax">fax</option>
-                                    <option value="cell">cell</option>
-                                    <option value="video">video</option>
-                                    <option value="pager">pager</option>
-                                    <option value="textphone">textphone</option>
-                                </select>
+                            <div id="phone_count" class="count-div">1</div>
+
+                            <div id="phoneNumbers">
+                                <div id="phone_number_1">
+                                    <div class="form-group">
+                                        <label for="phone_number_1">Phone Number:</label>
+                                        <input type="tel" id="phone_number_1" name="phone_number_1" placeholder="Enter phone number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone_type_1">Phone Type:</label>
+                                        <select name="phone_type_1" id="phone_type_1">
+                                            <option value=""></option>
+                                            <option value="text">text</option>
+                                            <option value="voice">voice</option>
+                                            <option value="fax">fax</option>
+                                            <option value="cell">cell</option>
+                                            <option value="video">video</option>
+                                            <option value="pager">pager</option>
+                                            <option value="textphone">textphone</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="button-group">
-                                <button>Add Number</button>
-                                <button>Remove Number</button>
+                                <button id="add-phone-button" onclick="addPhoneNumber();">Add Number</button>
+                                <button id="del-phone-button" onclick="delPhoneNumber();" disabled>Remove Number</button>
                             </div>
 
                             <hr>
@@ -159,6 +165,49 @@
             </div>
         </div>
 
+        <script>
+            function addPhoneNumber() {
+                console.log("Adding phone number");
+
+                // Find current phone number count
+                let phoneCountDiv = document.getElementById("phone_count");
+                let phoneCount = parseInt(phoneCountDiv.innerText);
+                console.log("Current phone count: " + phoneCount);
+
+                // Increment & update phone count
+                phoneCount++;
+                phoneCountDiv.innerText = phoneCount;
+
+                // Create new phone number section
+                let newPhone = document.createElement("div");
+                newPhone.id = `phone_number_${phoneCount}`;
+                newPhone.innerHTML = `
+                                    <div class="form-group">
+                                        <label for="phone_number_${phoneCount}">Phone Number:</label>
+                                        <input type="tel" id="phone_number_${phoneCount}" name="phone_number_${phoneCount}" placeholder="Enter phone number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone_type_${phoneCount}">Phone Type:</label>
+                                        <select name="phone_type_${phoneCount}" id="phone_type_${phoneCount}">
+                                            <option value=""></option>
+                                            <option value="text">text</option>
+                                            <option value="voice">voice</option>
+                                            <option value="fax">fax</option>
+                                            <option value="cell">cell</option>
+                                            <option value="video">video</option>
+                                            <option value="pager">pager</option>
+                                            <option value="textphone">textphone</option>
+                                        </select>
+                                    </div>
+                `
+                document.getElementById("phoneNumbers").appendChild(newPhone);
+
+                // Enable Delete Button
+                document.getElementById("del-phone-button").disabled = false;
+            }
+
+        </script>
+
         <!-- Temporary in page styling -->
         <style>
 
@@ -167,6 +216,7 @@
                 display: flex;
                 flex-direction: row;
                 align-items: center;
+                margin: 10px 0;
             }
             .form-group label {
                 width: 105px;
@@ -183,6 +233,11 @@
             /* Style the tab content */
             .tabContent .form-input {
                 width: 100%;
+            }
+
+            /* Hide count divs */
+            .count-div {
+                display: none;
             }
 
             /* Add margin and center button in  */
