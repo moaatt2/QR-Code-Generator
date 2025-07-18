@@ -206,6 +206,27 @@
                 document.getElementById("del-phone-button").disabled = false;
             }
 
+            function delPhoneNumber() {
+                console.log("Removing phone number");
+
+                // Find current phone number count
+                let phoneCountDiv = document.getElementById("phone_count");
+                let phoneCount = parseInt(phoneCountDiv.innerText);
+                console.log("Current phone count: " + phoneCount);
+
+                // Remove Phone section
+                document.getElementById(`phone_number_${phoneCount}`).remove();
+
+                // Decrement & update phone count
+                phoneCount--;
+                phoneCountDiv.innerText = phoneCount;
+
+                // Disable delete button if only 1 phone number left
+                if (phoneCount <= 1) {
+                    document.getElementById("del-phone-button").disabled = true;
+                }
+            }
+
         </script>
 
         <!-- Temporary in page styling -->
