@@ -98,7 +98,7 @@
                             <div id="phone_count" class="count-div">1</div>
 
                             <div id="phoneNumbers">
-                                <div id="phone_number_1">
+                                <div id="phone_section_1">
                                     <div class="form-group">
                                         <label for="phone_number_1">Phone Number:</label>
                                         <input type="tel" id="phone_number_1" name="phone_number_1" placeholder="Enter phone number">
@@ -127,8 +127,36 @@
                             <hr>
                         </div>
 
-                        <h3>Email Address</h3>
-                        <hr>
+                        <!-- Email Address -->
+                        <div>
+                            <h3>Email Address</h3>
+
+                            <div id="email_count" class="count-div">1</div>
+
+                            <div id="emailAddresses">
+                                <div id="email_section_1">
+                                    <div class="form-group">
+                                        <label for="email_address_1">Email Address:</label>
+                                        <input type="tel" id="email_address_1" name="email_address_1" placeholder="Enter email address">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email_type_1">Email Type:</label>
+                                        <select name="email_type_1" id="email_type_1">
+                                            <option value=""></option>
+                                            <option value="work">work</option>
+                                            <option value="home">home</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="button-group">
+                                <button id="add-email-button" onclick="addEmail();">Add Email</button>
+                                <button id="del-email-button" onclick="delEmail();" disabled>Remove Email</button>
+                            </div>
+
+                            <hr>
+                        </div>
 
                         <!-- Calendar Link -->
                         <div>
@@ -180,7 +208,7 @@
 
                 // Create new phone number section
                 let newPhone = document.createElement("div");
-                newPhone.id = `phone_number_${phoneCount}`;
+                newPhone.id = `phone_section_${phoneCount}`;
                 newPhone.innerHTML = `
                                     <div class="form-group">
                                         <label for="phone_number_${phoneCount}">Phone Number:</label>
@@ -215,7 +243,7 @@
                 console.log("Current phone count: " + phoneCount);
 
                 // Remove Phone section
-                document.getElementById(`phone_number_${phoneCount}`).remove();
+                document.getElementById(`phone_section_${phoneCount}`).remove();
 
                 // Decrement & update phone count
                 phoneCount--;
@@ -224,6 +252,62 @@
                 // Disable delete button if only 1 phone number left
                 if (phoneCount <= 1) {
                     document.getElementById("del-phone-button").disabled = true;
+                }
+            }
+
+            function addEmail() {
+                console.log("Adding email address");
+
+                // Find current email count
+                let emailCountDiv = document.getElementById("email_count");
+                let emailCount = parseInt(emailCountDiv.innerText);
+                console.log("Current email count: " + emailCount);
+
+                // Increment & update email count
+                emailCount++;
+                emailCountDiv.innerText = emailCount;
+
+                // Create new phone number section
+                let newEmail = document.createElement("div");
+                newEmail.id = `email_section_${emailCount}`;
+                newEmail.innerHTML = `
+                                    <div class="form-group">
+                                        <label for="email_address_${emailCount}">Email Address:</label>
+                                        <input type="tel" id="email_address_${emailCount}" name="email_address_${emailCount}" placeholder="Enter email address">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email_type_${emailCount}">Email Type:</label>
+                                        <select name="email_type_${emailCount}" id="email_type_${emailCount}">
+                                            <option value=""></option>
+                                            <option value="work">work</option>
+                                            <option value="home">home</option>
+                                        </select>
+                                    </div>
+                `
+                document.getElementById("emailAddresses").appendChild(newEmail);
+
+                // Enable Delete Button
+                document.getElementById("del-email-button").disabled = false;
+            }
+
+            function delEmail() {
+                console.log("Removing email address");
+
+                // Find current phone number count
+                let emailCountDiv = document.getElementById("email_count");
+                let emailCount = parseInt(emailCountDiv.innerText);
+                console.log("Current phone count: " + emailCount);
+
+                // Remove Phone section
+                document.getElementById(`email_section_${emailCount}`).remove();
+
+                // Decrement & update phone count
+                emailCount--;
+                emailCountDiv.innerText = emailCount;
+
+                // Disable delete button if only 1 phone number left
+                if (emailCount <= 1) {
+                    document.getElementById("del-email-button").disabled = true;
                 }
             }
 
