@@ -186,7 +186,15 @@
             <!-- Image Section -->
             <div class="image-column">
                 <img id="qr_image_display" src="assets/images/placeholder.png">
-                <br>
+                <hr>
+                <label for="correction_level">Correction Level:</label>
+                <select name="correction_level" id="correction_level">
+                    <option value="L">L -  7% of data can be restored</option>
+                    <option value="M">M - 15% of data can be restored</option>
+                    <option value="Q">Q - 25% of data can be restored</option>
+                    <option value="H">H - 30% of data can be restored</option>
+                </select>
+                <hr>
                 <button>Update QR Code</button>
                 <br>
                 <button>Download</button>
@@ -346,8 +354,18 @@
             }
 
             /* Add margin and center button in  */
+            .image-column hr,
+            .image-column select,
             .image-column button {
                 margin: 5px;
+                width: calc(100% - 10px);
+            }
+
+            /* Style input label */
+            .image-column label {
+                align-self: center;
+                font-weight: bold;
+                font-size: 2 rem;
             }
 
             /* Style vCard buttons */
@@ -369,7 +387,7 @@
 
             /* Use flexbox to center and stretch buttons */
             .image-column {
-                flex: 0 0 200px;
+                flex: 0 0 230px;
                 display: flex;
                 flex-direction: column;
                 align-self: center;
