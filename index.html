@@ -14,8 +14,8 @@
             <div class="input-column">
                 <!-- Tab Headers -->
                 <div class="tab">
-                    <button class="tablinks" onclick="openTab(event, 'rawData')"><b>Raw Data</b></button>
-                    <button class="tablinks" onclick="openTab(event, 'vCard')" id="defaultTab"><b>vCard</b></button>
+                    <button class="tablinks" name="rawDataButton" onclick="openTab(event, 'rawData')"><b>Raw Data</b></button>
+                    <button class="tablinks" name="vCardButton" onclick="openTab(event, 'vCard')" id="defaultTab"><b>vCard</b></button>
                 </div>
 
                 <!-- Tab Content -->
@@ -195,12 +195,41 @@
                     <option value="H">H - 30% of data can be restored</option>
                 </select>
                 <hr>
-                <button>Update QR Code</button>
+                <button onclick="generateQRCode()">Update QR Code</button>
                 <br>
                 <button>Download</button>
             </div>
         </div>
 
+        <!-- QR Code Generation Scripts -->
+        <script>
+            function generateQRCode() {
+                console.log("Generating QR Code");
+
+                // Check for active tab
+                console.log("Checking active tab");
+                let activeTabButton = document.querySelector(".tablinks.active").name;
+
+                let data;
+                if (activeTabButton === "rawDataButton") {
+                    data = getRawData();
+                } else if (activeTabButton === "vCardButton") {
+                    data = getVcardData();
+                } else {
+                    console.error("No active tab found");
+                }
+            }
+
+            function getRawData() {
+                console.log("Getting raw data");
+            }
+
+            function getVcardData() {
+                console.log("Getting vCard data");
+            }
+        </script>
+    
+        <!-- Email/Phone Management Scripts -->
         <script>
             function addPhoneNumber() {
                 console.log("Adding phone number");
