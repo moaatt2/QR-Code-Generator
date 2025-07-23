@@ -222,10 +222,14 @@
                 // print the data to be encoded to console
                 console.log("Data to encode:\n\n```\n" + data + "\n```");
 
+                // Get correction level
+                let correctionLevel = document.getElementById("correction_level").value;
+                console.log("Using correction level: " + correctionLevel);
+
                 // Update qr code
                 console.log("Updating QR Code image");
                 let qrImage = document.getElementById("qr_image_display");
-                qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(data)}&size=200x200`;
+                qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(data)}&size=200x200&ecc=${correctionLevel}`;
             }
 
             function getRawData() {
