@@ -221,6 +221,11 @@
 
                 // print the data to be encoded to console
                 console.log("Data to encode:\n\n```\n" + data + "\n```");
+
+                // Update qr code
+                console.log("Updating QR Code image");
+                let qrImage = document.getElementById("qr_image_display");
+                qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(data)}&size=200x200`;
             }
 
             function getRawData() {
