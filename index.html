@@ -239,6 +239,14 @@
 
             function getVcardData() {
                 console.log("Getting vCard data");
+
+                // Start vCard Data
+                let out = "BEGIN:VCARD\n"
+                out += "VERSION:4.0\n";
+
+                // End & Return vCard Data
+                out += "END:VCARD\n";
+                return out;
             }
         </script>
     
