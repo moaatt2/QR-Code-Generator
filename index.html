@@ -244,6 +244,10 @@
                 let out = "BEGIN:VCARD\n"
                 out += "VERSION:4.0\n";
 
+                // Handle display name
+                let displayName = document.getElementById("displayName").value.trim()
+                out += `FN:${displayName}\n`;
+
                 // End & Return vCard Data
                 out += "END:VCARD\n";
                 return out;
