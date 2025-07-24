@@ -248,8 +248,16 @@
                 let displayName = document.getElementById("displayName").value.trim()
                 out += `FN:${displayName}\n`;
 
+                // Handle Name
+                let prefix     = document.getElementById("prefix").value.trim();
+                let firstName  = document.getElementById("firstName").value.trim();
+                let middleName = document.getElementById("middleName").value.trim();
+                let lastName   = document.getElementById("lastName").value.trim();
+                let suffix     = document.getElementById("suffix").value.trim();
+                out += `N:${lastName};${firstName};${middleName};${prefix};${suffix}\n`
+
                 // End & Return vCard Data
-                out += "END:VCARD\n";
+                out += "END:VCARD";
                 return out;
             }
         </script>
