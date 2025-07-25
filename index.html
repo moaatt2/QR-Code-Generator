@@ -262,6 +262,12 @@
                     out += `NOTE:${notes}\n`;
                 }
 
+                // Add Sound Link
+                let soundLink = document.getElementById("soundLink").value.trim();
+                if (soundLink.length > 0) {
+                    out += `SOUND:${soundLink}\n`;
+                }
+
                 // End & Return vCard Data
                 out += "END:VCARD";
                 return out;
