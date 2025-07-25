@@ -274,6 +274,16 @@
                     out += `SOURCE:${sourceLink}\n`;
                 }
 
+                // Get phone count and itterate over phone number objects
+                let phoneCount = parseInt(document.getElementById("phone_count").innerText);
+                for (let i = 1; i <= phoneCount; i++) {
+
+                    // Add Phone Number
+                    let phoneNumber = document.getElementById(`phone_number_${i}`).value.trim();
+                    let phoneType = document.getElementById(`phone_type_${i}`).value.trim();
+                    out += `TEL;TYPE=${phoneType}:${phoneNumber}\n`;
+                }
+
                 // End & Return vCard Data
                 out += "END:VCARD";
                 return out;
