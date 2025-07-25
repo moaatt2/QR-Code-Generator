@@ -256,6 +256,12 @@
                 let suffix     = document.getElementById("suffix").value.trim();
                 out += `N:${lastName};${firstName};${middleName};${prefix};${suffix}\n`
 
+                // Add Notes
+                let notes = document.getElementById("notes").value.trim();
+                if (notes.length > 0) {
+                    out += `NOTE:${notes}\n`;
+                }
+
                 // End & Return vCard Data
                 out += "END:VCARD";
                 return out;
