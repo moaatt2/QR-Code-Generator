@@ -304,6 +304,12 @@
                     }
                 }
 
+                // Add Calendar Link
+                let calendarLink = document.getElementById("calendarLink").value.trim();
+                if (calendarLink.length > 0) {
+                    out += `CALURI:${calendarLink}\n`;
+                }
+
                 // End & Return vCard Data
                 out += "END:VCARD";
                 return out;
