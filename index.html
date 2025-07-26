@@ -284,6 +284,26 @@
                     out += `TEL;TYPE=${phoneType}:${phoneNumber}\n`;
                 }
 
+                // Get email count and itterate over email objects
+                let emailCount = parseInt(document.getElementById("email_count").innerText);
+                for (let i = 1; i <= emailCount; i++) {
+
+                    // Add Email Address
+                    let emailAddress = document.getElementById(`email_address_${i}`).value.trim();
+                    let emailType = document.getElementById(`email_type_${i}`).value.trim();
+
+                    // Logic to handle blank email/email type
+                    if (emailAddress.length > 0) {
+                        if (emailType.length > 0) {
+                            out += `EMAIL;TYPE=${emailType}:${emailAddress}\n`;
+                        } else {
+                            out += `EMAIL:${emailAddress}\n`;
+                        }
+                    } else {
+                        continue;
+                    }
+                }
+
                 // End & Return vCard Data
                 out += "END:VCARD";
                 return out;
