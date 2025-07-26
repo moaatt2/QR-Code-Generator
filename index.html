@@ -310,6 +310,12 @@
                     out += `CALURI:${calendarLink}\n`;
                 }
 
+                // Add Birthday
+                let birthday = document.getElementById("birthday").value.trim();
+                if (birthday.length > 0) {
+                    out += `BDAY:${birthday}\n`;
+                }
+
                 // End & Return vCard Data
                 out += "END:VCARD";
                 return out;
