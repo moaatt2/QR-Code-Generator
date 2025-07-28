@@ -244,6 +244,11 @@
                 let out = "BEGIN:VCARD\n"
                 out += "VERSION:4.0\n";
 
+                // Add revision
+                let dateString = new Date().toISOString();
+                dateString = dateString.replace(/[-:]/g, '').slice(0, -5);
+                out += `REV:${dateString}Z\n`;
+
                 // Handle display name
                 let displayName = document.getElementById("displayName").value.trim()
                 out += `FN:${displayName}\n`;
