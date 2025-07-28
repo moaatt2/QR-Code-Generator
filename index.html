@@ -311,7 +311,7 @@
                 }
 
                 // Add Birthday
-                let birthday = document.getElementById("birthday").value.trim();
+                let birthday = document.getElementById("birthday").value.replaceAll("-", "");
                 if (birthday.length > 0) {
                     out += `BDAY:${birthday}\n`;
                 }
