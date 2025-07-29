@@ -201,6 +201,30 @@
             </div>
         </div>
 
+        <!-- Misc Helper Scripts -->
+        <script>
+            function validateCleanURL(url, failureTemplate) {
+                console.log("Validating URL: " + url);
+
+                // Add http:// if no protocol is present
+                cleanedUrl = url.trim();
+                if (!cleanedUrl.includes("://")) {
+                    cleanedUrl = "http://" + cleanedUrl;
+                }
+
+                // Validate URL and throw error if invalid
+                try {
+                    let parsedURL = new URL(cleanedUrl);
+                    console.log(`${cleanedUrl} is valid`)
+                    return cleanedUrl;
+                } catch (e) {
+                    console.error("Invalid URL: " + url);
+                    alert(failureTemplate.replace("{url}", url));
+                    throw new Error("Invalid URL: " + url);
+                }
+            }
+        </script>
+
         <!-- QR Code Generation Scripts -->
         <script>
             function generateQRCode() {
@@ -270,6 +294,7 @@
                 // TODO: Clean
                 // Add Sound Link
                 let soundLink = document.getElementById("soundLink").value.trim();
+                soundLink = validateCleanURL(soundLink, "Invalid Sound Link: {url}");
                 if (soundLink.length > 0) {
                     out += `SOUND:${soundLink}\n`;
                 }
@@ -450,7 +475,6 @@
                     document.getElementById("del-email-button").disabled = true;
                 }
             }
-
         </script>
 
         <!-- Temporary in page styling -->
