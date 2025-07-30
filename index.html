@@ -291,7 +291,6 @@
                     out += `NOTE:${notes}\n`;
                 }
 
-                // TODO: Clean
                 // Add Sound Link
                 let soundLink = document.getElementById("soundLink").value.trim();
                 soundLink = validateCleanURL(soundLink, "Invalid Sound Link: {url}");
@@ -299,9 +298,9 @@
                     out += `SOUND:${soundLink}\n`;
                 }
 
-                // TODO: Clean
                 // Add Source Link
                 let sourceLink = document.getElementById("sourceLink").value.trim();
+                sourceLink = validateCleanURL(sourceLink, "Invalid Source Link: {url}")
                 if (sourceLink.length > 0) {
                     out += `SOURCE:${sourceLink}\n`;
                 }
@@ -338,9 +337,9 @@
                     }
                 }
 
-                // TODO: Clean
                 // Add Calendar Link
                 let calendarLink = document.getElementById("calendarLink").value.trim();
+                calendarLink = validateCleanURL(calendarLink, "Invalid Calendar Link {url}")
                 if (calendarLink.length > 0) {
                     out += `CALURI:${calendarLink}\n`;
                 }
