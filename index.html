@@ -322,9 +322,20 @@
 
                     // Add Phone Number
                     let phoneNumber = document.getElementById(`phone_number_${i}`).value.trim();
-                    validatePhoneNumber(phoneNumber, i);
                     let phoneType = document.getElementById(`phone_type_${i}`).value.trim();
-                    out += `TEL;TYPE=${phoneType}:${phoneNumber}\n`;
+                    console.log(`Phone Type Length: ${phoneType.length}`);
+
+                    // Logic to handle blank phone/phone type
+                    if (phoneNumber.length === 0) {
+                        continue;
+                    } else {
+                        validatePhoneNumber(phoneNumber, i);
+                        if (phoneType.length == 0) {
+                            out += `TEL:${phoneNumber}\n`;
+                        } else {
+                            out += `TEL;TYPE=${phoneType}:${phoneNumber}\n`;
+                        }
+                    }
                 }
 
                 // TODO: Clean
