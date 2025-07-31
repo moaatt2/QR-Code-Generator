@@ -223,6 +223,16 @@
                     throw new Error("Invalid URL: " + url);
                 }
             }
+
+            function validatePhoneNumber(phoneNumber, i) {
+                console.log("Validating phone number: " + phoneNumber);
+                if (!/^\(\d{3}\) \d{3}-\d{4}$/.test(phoneNumber)) {
+                    console.error(`Invalid Phone Number ${i}: ${phoneNumber}`);
+                    alert(`Invalid Phone Number ${i}: ${phoneNumber}`);
+                    throw new Error(`Invalid Phone Number ${i}: ${phoneNumber}`);
+                }
+                return phoneNumber;
+            }
         </script>
 
         <!-- QR Code Generation Scripts -->
@@ -312,6 +322,7 @@
 
                     // Add Phone Number
                     let phoneNumber = document.getElementById(`phone_number_${i}`).value.trim();
+                    validatePhoneNumber(phoneNumber, i);
                     let phoneType = document.getElementById(`phone_type_${i}`).value.trim();
                     out += `TEL;TYPE=${phoneType}:${phoneNumber}\n`;
                 }
